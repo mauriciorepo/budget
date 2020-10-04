@@ -1,6 +1,6 @@
 package com.finance.budget;
 
-import com.finance.budget.exception.APIErros;
+import com.finance.budget.exception.APIErrors;
 import com.finance.budget.exception.BusinessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,21 +16,21 @@ public class ApplicationControllerAdvice {
 
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public APIErros handleBusinessException(BusinessException ex){
-        return new APIErros(ex);
+    public APIErrors handleBusinessException(BusinessException ex){
+        return new APIErrors(ex);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public APIErros handleValidationException(MethodArgumentNotValidException ex){
+    public APIErrors handleValidationException(MethodArgumentNotValidException ex){
 
         BindingResult bindingResult=ex.getBindingResult();
-        return new APIErros (bindingResult);
+        return new APIErrors(bindingResult);
     }
 
     @ExceptionHandler(ResponseStatusException.class)
 
     public ResponseEntity handleResponseStatusException(ResponseStatusException ex){
-        return new ResponseEntity(new APIErros(ex), ex.getStatus());
+        return new ResponseEntity(new APIErrors(ex), ex.getStatus());
     }
 }

@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController()
 @RequestMapping("/api/companies")
 @RequiredArgsConstructor
@@ -18,7 +20,7 @@ public class CompanyController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CompanyDTO create(@RequestBody CompanyDTO companyDTO){
+    public CompanyDTO create(@RequestBody @Valid CompanyDTO companyDTO){
 
         Company company= modelMapper.map(companyDTO, Company.class);
 
