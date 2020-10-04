@@ -1,0 +1,55 @@
+package com.finance.budget.model.repository;
+
+import com.finance.budget.model.Company;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@ExtendWith(SpringExtension.class)
+@ActiveProfiles("test")
+@DataJpaTest
+public class CompanyRepositoryTest {
+
+    @Autowired
+    CompanyRepository repository;
+
+
+
+    @Test
+    @DisplayName("Should save a company")
+    public void saveCompanyTest(){
+        Company company=newInstanceCompany();
+
+        Company savedCompany=repository.save(company);
+
+        assertThat(savedCompany).isNotNull();
+        assertThat(savedCompany.getId()).isPositive();
+
+    }
+
+    private Company newInstanceCompany(){
+
+        return Company.builder()
+               // .id(1l)
+                .cellphone("984006537")
+                .account("Banco of brazil")
+                .contactName("Marcos")
+                .country("Brazil")
+                .stateRegistration("123454337")
+                .localization("park avenue")
+                .name("Mauricio")
+                .neighborhood("Casa Forte")
+                .StateAbbrev("PE")
+                .telephone("558175286586")
+                .telephone2("558175286586")
+                .registrationDate("100384")
+                .build();
+    }
+
+}
