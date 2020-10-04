@@ -21,14 +21,18 @@ public class CompanyDTO {
         private String name;
 
         private String telephone;
+
         @NotEmpty
         private String localization;
+
         @NotEmpty
         private String contactName;
 
         private String telephone2;
+
         @NotEmpty
         private String cellphone;
+
         @NotEmpty
         private String country;
 
@@ -40,6 +44,7 @@ public class CompanyDTO {
         private String StateAbbrev;
 
         private String account;
+
         @NotEmpty
         private String registrationDate;
 }
