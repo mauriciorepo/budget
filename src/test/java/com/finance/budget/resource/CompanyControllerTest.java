@@ -24,6 +24,8 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.Optional;
+
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest
@@ -89,6 +91,47 @@ public class CompanyControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("errors", Matchers.hasSize(7)))
 
         ;
+
+    }
+
+    @Test
+    @DisplayName("should return company")
+    public void shouldFindCompanyByIdTest() throws Exception {
+        Company company=createCompany();
+        Long id=1L;
+
+        BDDMockito.given(service.getById(id)).willReturn(Optional.of(company));
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get(COMPANY_API.concat("/" + id))
+                .accept(MediaType.APPLICATION_JSON);
+                ;
+
+        mvc
+                .perform(request)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("id").value("1"))
+        ;
+
+    }
+
+    @Test
+    @DisplayName("must return not found when the book is not founded")
+    public void companyNotFoundTest() throws Exception {
+
+        Company company=createCompany();
+        Long id=1L;
+
+        BDDMockito.given(service.getById(id)).willReturn(Optional.empty());
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get(COMPANY_API.concat("/" + id))
+                .accept(MediaType.APPLICATION_JSON);
+        ;
+
+        mvc
+                .perform(request)
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
 
     }
 

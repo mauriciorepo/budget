@@ -6,8 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,6 +22,8 @@ public class CompanyRepositoryTest {
     @Autowired
     CompanyRepository repository;
 
+    @Autowired
+    TestEntityManager entityManager;
 
 
     @Test
@@ -32,6 +37,28 @@ public class CompanyRepositoryTest {
         assertThat(savedCompany.getId()).isPositive();
 
     }
+
+    @Test
+    @DisplayName("should return a company")
+    public void findCompanyTest(){
+        Long id=1L;
+        entityManager.persist(newInstanceCompany());
+
+        Optional<Company> foundedCompany= repository.findById(id);
+
+        assertThat(foundedCompany.isPresent()).isTrue();
+    }
+
+    @Test
+    @DisplayName("should return null when try to find a company")
+    public void shouldReturnNullCompany(){
+        Long id=1L;
+
+        Optional<Company> notFoundedCompany=repository.findById(id);
+
+        assertThat(notFoundedCompany.isPresent()).isFalse();
+    }
+
 
     private Company newInstanceCompany(){
 

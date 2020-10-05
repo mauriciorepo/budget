@@ -46,4 +46,6 @@ public class Company {
     private String account;
 
     private String registrationDate;
+
+
 }

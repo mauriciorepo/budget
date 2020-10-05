@@ -15,6 +15,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
@@ -58,6 +60,37 @@ public class CompanyServiceTest {
         assertThat(savedCompany.getName()).isEqualTo("Mauricio");
         assertThat(savedCompany.getAccount()).isEqualTo("Banco of brazil");
         assertThat(savedCompany.getCellphone()).isEqualTo("984006537");
+
+    }
+
+
+    @Test
+    @DisplayName("should return a company")
+    public void findCompanyTest(){
+        Company company=newInstanceCompany();
+        Long id=1L;
+
+        Mockito.when(repository.findById(id)).thenReturn(Optional.of(company));
+
+        Optional<Company> foundCompany= service.getById(id);
+
+        assertThat(foundCompany.get().getId()).isNotNull();
+        assertThat(foundCompany.get().getId()).isPositive();
+
+    }
+
+    @Test
+    @DisplayName("should return a null company")
+    public void CompanyNotFoundedTest(){
+        //Company company=;
+        Long id=1L;
+
+        Mockito.when(repository.findById(id)).thenReturn(Optional.empty());
+
+        Optional<Company> notFoundCompany= service.getById(id);
+
+        assertThat(notFoundCompany.isPresent()).isFalse();
+
 
     }
 
