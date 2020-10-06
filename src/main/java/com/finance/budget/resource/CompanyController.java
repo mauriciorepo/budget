@@ -42,4 +42,12 @@ public class CompanyController {
 
 
     }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCompany(@PathVariable Long id){
+        Company company=companyService.getById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
+        companyService.delete(company);
+
+    }
 }

@@ -135,6 +135,40 @@ public class CompanyControllerTest {
 
     }
 
+    @Test
+    @DisplayName("should receive a no content when try to  delete a company")
+    public void deleteCompanyTest() throws Exception {
+        Long id=1L;
+        Company company=createCompany();
+        company.setId(id);
+
+        BDDMockito.given(service.getById(id)).willReturn(Optional.of(company));
+        //BDDMockito.given(service.delete(id)).willReturn()
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .delete(COMPANY_API.concat("/" + id));
+
+        mvc.perform(request)
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+
+
+    }
+
+    @Test
+    @DisplayName("should throw an exception when try to delete a company that doesn´t exists")
+    public void deleteNotExistCompany() throws Exception {
+        Long id = 1L;
+        BDDMockito.given(service.getById(id)).willReturn(Optional.empty());
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .delete(COMPANY_API.concat("/" + id));
+
+        mvc.perform(request)
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+
+
     private CompanyDTO createNewCompanyDTO(){
         return CompanyDTO.builder()
                 .cellphone("984006537")

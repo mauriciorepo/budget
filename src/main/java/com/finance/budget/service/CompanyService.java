@@ -8,4 +8,6 @@ public interface CompanyService {
     Company create(Company company);
 
     Optional<Company> getById(Long id);
+
+    void delete(Company company);
 }

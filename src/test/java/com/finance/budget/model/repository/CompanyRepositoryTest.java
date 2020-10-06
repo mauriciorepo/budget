@@ -59,6 +59,24 @@ public class CompanyRepositoryTest {
         assertThat(notFoundedCompany.isPresent()).isFalse();
     }
 
+    @Test
+    @DisplayName("should delete a company")
+    public void deleteCompanyTest(){
+
+        Company company=newInstanceCompany();
+
+        company=entityManager.persist(company);
+
+        Company foundedCompany=entityManager.find(Company.class, company.getId());
+
+        repository.delete(company);
+
+        Company deleteCompany= entityManager.find(Company.class, foundedCompany.getId());
+
+        assertThat(deleteCompany).isNull();
+
+
+    }
 
     private Company newInstanceCompany(){
 
