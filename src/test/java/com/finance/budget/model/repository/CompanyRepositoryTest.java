@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
+
 @DataJpaTest
 public class CompanyRepositoryTest {
 
@@ -44,9 +45,9 @@ public class CompanyRepositoryTest {
         Long id=1L;
         entityManager.persist(newInstanceCompany());
 
-        Optional<Company> foundedCompany= repository.findById(id);
+        boolean foundedCompany= repository.existsByName(newInstanceCompany().getName());
 
-        assertThat(foundedCompany.isPresent()).isTrue();
+        assertThat(foundedCompany).isTrue();
     }
 
     @Test
@@ -54,9 +55,9 @@ public class CompanyRepositoryTest {
     public void shouldReturnNullCompany(){
         Long id=1L;
 
-        Optional<Company> notFoundedCompany=repository.findById(id);
+        boolean notFoundedCompany=repository.existsById(id);
 
-        assertThat(notFoundedCompany.isPresent()).isFalse();
+        assertThat(notFoundedCompany).isFalse();
     }
 
     @Test
@@ -69,12 +70,24 @@ public class CompanyRepositoryTest {
 
         Company foundedCompany=entityManager.find(Company.class, company.getId());
 
-        repository.delete(company);
+        repository.delete(foundedCompany);
 
         Company deleteCompany= entityManager.find(Company.class, foundedCompany.getId());
 
         assertThat(deleteCompany).isNull();
 
+    }
+
+    @Test
+    @DisplayName("should ")
+    public void updateCompanyTest(){
+
+
+        Company company = entityManager.persist(newInstanceCompany());
+
+        Company foundedCompany=entityManager.find(Company.class,company.getId());
+
+        //assertThat()
 
     }
 

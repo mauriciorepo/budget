@@ -35,6 +35,17 @@ public class ImplCompanyService implements CompanyService {
         if(company.getId() ==null || company ==null){
             throw new IllegalArgumentException("Company does not exist");
         }
+
         this.repository.delete(company);
+    }
+
+    @Override
+    public Company updateCompany(Company company) {
+        if(company.getId() ==null || company ==null){
+            throw new IllegalArgumentException("Company does not exist");
+        }
+
+        repository.save(company);
+        return company;
     }
 }

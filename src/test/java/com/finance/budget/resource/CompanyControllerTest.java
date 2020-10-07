@@ -1,6 +1,7 @@
 package com.finance.budget.resource;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finance.budget.model.Company;
 
@@ -168,7 +169,87 @@ public class CompanyControllerTest {
     }
 
 
+    @Test
+    @DisplayName("should return a updated company")
+    public void updateCompanyTest() throws Exception {
+        Long id=1L;
+        Company company=createCompany();
+        company.setAccount("Banco of brazil2");
+        company.setCellphone("9840065372");
+        CompanyDTO dto=createNewCompanyDTO();
+        dto.setId(id);
+        dto.setAccount("Banco of brazil2");
+                dto.setCellphone("9840065372");
 
+        String json= new ObjectMapper().writeValueAsString(dto);
+        BDDMockito.given(service.updateCompany(Mockito.any(Company.class))).willReturn(company);
+
+        BDDMockito.given(service.getById(id)).willReturn(Optional.of(company));
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .put(COMPANY_API.concat("/" + id))
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+                ;
+
+        mvc.perform(request)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("id").value("1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("account").value("Banco of brazil2"))
+                .andExpect(MockMvcResultMatchers.jsonPath("cellphone").value("9840065372"));
+
+
+
+    }
+
+
+    @Test
+    @DisplayName("should return a not founded status when try to update a company")
+    public void updateNotFoundedCompanyTest() throws Exception {
+        Long id =1L;
+
+        CompanyDTO dto= createNewCompanyDTO();
+         dto.setId(id);
+        String json= new ObjectMapper().writeValueAsString(dto);
+
+        BDDMockito.given(service.getById(id)).willReturn(Optional.empty());
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .put(COMPANY_API.concat("/" + id))
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+                ;
+
+        mvc
+                .perform(request)
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+
+    }
+
+    @Test
+    @DisplayName("should return a conflict exception when try to update company with different id")
+    public void updateCompanyWithConflictIdTest() throws Exception {
+        Long id =10L;
+
+        CompanyDTO dto= createNewCompanyDTO();
+
+        String json= new ObjectMapper().writeValueAsString(dto);
+
+        BDDMockito.given(service.getById(id)).willReturn(Optional.empty());
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .put(COMPANY_API.concat("/" + id))
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+                ;
+
+        mvc
+                .perform(request)
+                .andExpect(MockMvcResultMatchers.status().isConflict());
+    }
     private CompanyDTO createNewCompanyDTO(){
         return CompanyDTO.builder()
                 .cellphone("984006537")

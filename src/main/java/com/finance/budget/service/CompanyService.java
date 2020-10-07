@@ -10,4 +10,6 @@ public interface CompanyService {
     Optional<Company> getById(Long id);
 
     void delete(Company company);
+
+    Company updateCompany(Company any);
 }

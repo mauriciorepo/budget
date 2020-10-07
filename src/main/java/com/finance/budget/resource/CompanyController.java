@@ -4,8 +4,10 @@ import com.finance.budget.exception.BusinessException;
 import com.finance.budget.model.Company;
 import com.finance.budget.model.dto.CompanyDTO;
 import com.finance.budget.service.CompanyService;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -50,4 +52,23 @@ public class CompanyController {
         companyService.delete(company);
 
     }
+
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CompanyDTO  update(@PathVariable Long id, @RequestBody @Valid  CompanyDTO dto){
+
+
+        if(!(id==dto.getId())){
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
+        }
+      return  companyService.getById(id).map(
+              company-> {
+                  BeanUtils.copyProperties(company,dto);
+                  Company updatableCompany =companyService.updateCompany(company);
+                  return modelMapper.map(updatableCompany,CompanyDTO.class);
+
+              }).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+    }
+
 }

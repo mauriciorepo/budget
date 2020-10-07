@@ -123,6 +123,26 @@ public class CompanyServiceTest {
     }
 
 
+    @Test
+    @DisplayName("should return a updated company")
+    public void updateCompanyTest(){
+
+        Long id =1L;
+
+        Company company=newInstanceCompany();
+
+        Mockito.when(repository.findById(id)).thenReturn(Optional.of(company));
+
+        Mockito.when(repository.save(Mockito.any(Company.class))).thenReturn(company);
+
+        Company savedCompany= service.updateCompany(company);
+
+        assertThat(savedCompany).isNotNull();
+        assertThat(savedCompany.getId()).isNotNull();
+
+    }
+
+
 
 
     private Company newInstanceCompany(){
