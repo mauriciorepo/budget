@@ -4,6 +4,7 @@ import com.finance.budget.exception.BusinessException;
 import com.finance.budget.model.Company;
 import com.finance.budget.model.dto.CompanyDTO;
 import com.finance.budget.service.CompanyService;
+import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -24,6 +25,7 @@ public class CompanyController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("CREATE A COMPANY")
     public CompanyDTO create(@RequestBody @Valid CompanyDTO companyDTO){
 
         Company company= modelMapper.map(companyDTO, Company.class);
@@ -59,7 +61,7 @@ public class CompanyController {
 
 
         if(!(id==dto.getId())){
-            throw new ResponseStatusException(HttpStatus.CONFLICT);
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "different id value");
         }
       return  companyService.getById(id).map(
               company-> {
@@ -67,7 +69,7 @@ public class CompanyController {
                   Company updatableCompany =companyService.updateCompany(company);
                   return modelMapper.map(updatableCompany,CompanyDTO.class);
 
-              }).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
+              }).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Company not exist"));
 
     }
 
