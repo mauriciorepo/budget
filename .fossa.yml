@@ -1,0 +1,11 @@
+version: 1
+cli:
+  server: https://app.fossa.com
+  fetcher: custom
+  project: github.com/fossas/fossa-cli
+analyze:
+  modules:
+    - name: fossa-cli
+      type: go
+      target: github.com/fossas/fossa-cli/cmd/fossa
+      path: ./cmd/fossa
