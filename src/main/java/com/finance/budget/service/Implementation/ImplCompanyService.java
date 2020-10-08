@@ -3,7 +3,7 @@ package com.finance.budget.service.Implementation;
 import com.finance.budget.model.Company;
 import com.finance.budget.model.repository.CompanyRepository;
 import com.finance.budget.service.CompanyService;
-import javassist.NotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class ImplCompanyService implements CompanyService {
 
-    CompanyRepository repository;
+  private   CompanyRepository repository;
 
     public ImplCompanyService(CompanyRepository repository){
         this.repository=repository;

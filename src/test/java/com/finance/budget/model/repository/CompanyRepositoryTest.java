@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Optional;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,7 +42,7 @@ public class CompanyRepositoryTest {
     @Test
     @DisplayName("should return a company")
     public void findCompanyTest(){
-        Long id=1L;
+
         entityManager.persist(newInstanceCompany());
 
         boolean foundedCompany= repository.existsByName(newInstanceCompany().getName());
@@ -79,15 +79,19 @@ public class CompanyRepositoryTest {
     }
 
     @Test
-    @DisplayName("should ")
+    @DisplayName("should return a updated company")
     public void updateCompanyTest(){
 
 
         Company company = entityManager.persist(newInstanceCompany());
-
+        Company updatableCompany=newInstanceCompany();
+        updatableCompany.setName("Mauricio2");
         Company foundedCompany=entityManager.find(Company.class,company.getId());
 
-        //assertThat()
+        Company savedCompany=repository.save(updatableCompany);
+
+
+        assertThat(savedCompany.getName()).isEqualTo("Mauricio2");
 
     }
 
