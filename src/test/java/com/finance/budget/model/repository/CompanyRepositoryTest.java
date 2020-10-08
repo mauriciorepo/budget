@@ -84,11 +84,10 @@ public class CompanyRepositoryTest {
 
 
         Company company = entityManager.persist(newInstanceCompany());
-        Company updatableCompany=newInstanceCompany();
-        updatableCompany.setName("Mauricio2");
-        
+        company.setName("Mauricio2");
 
-        Company savedCompany=repository.save(updatableCompany);
+
+        Company savedCompany=repository.save(company);
 
 
         assertThat(savedCompany.getName()).isEqualTo("Mauricio2");
