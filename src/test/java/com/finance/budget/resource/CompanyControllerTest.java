@@ -1,7 +1,7 @@
 package com.finance.budget.resource;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finance.budget.model.Company;
 

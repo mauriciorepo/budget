@@ -1,15 +1,16 @@
 package com.finance.budget.resource;
 
-import com.finance.budget.exception.BusinessException;
+
 import com.finance.budget.model.Company;
 import com.finance.budget.model.dto.CompanyDTO;
 import com.finance.budget.service.CompanyService;
 import io.swagger.annotations.ApiOperation;
-import javassist.NotFoundException;
+
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -60,7 +61,7 @@ public class CompanyController {
     public CompanyDTO  update(@PathVariable Long id, @RequestBody @Valid  CompanyDTO dto){
 
 
-        if(!(id==dto.getId())){
+        if((id!=dto.getId())){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "different id value");
         }
       return  companyService.getById(id).map(
