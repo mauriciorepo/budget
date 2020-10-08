@@ -106,7 +106,7 @@ public class CompanyControllerTest {
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .get(COMPANY_API.concat("/" + id))
                 .accept(MediaType.APPLICATION_JSON);
-                
+
 
         mvc
                 .perform(request)
@@ -128,7 +128,7 @@ public class CompanyControllerTest {
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .get(COMPANY_API.concat("/" + id))
                 .accept(MediaType.APPLICATION_JSON);
-        ;
+
 
         mvc
                 .perform(request)
@@ -144,7 +144,7 @@ public class CompanyControllerTest {
         company.setId(id);
 
         BDDMockito.given(service.getById(id)).willReturn(Optional.of(company));
-        //BDDMockito.given(service.delete(id)).willReturn()
+
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .delete(COMPANY_API.concat("/" + id));
