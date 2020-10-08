@@ -120,7 +120,7 @@ public class CompanyControllerTest {
     @DisplayName("must return not found when the book is not founded")
     public void companyNotFoundTest() throws Exception {
 
-        Company company=createCompany();
+
         Long id=1L;
 
         BDDMockito.given(service.getById(id)).willReturn(Optional.empty());

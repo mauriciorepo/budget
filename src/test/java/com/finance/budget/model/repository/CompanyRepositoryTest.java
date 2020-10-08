@@ -86,7 +86,7 @@ public class CompanyRepositoryTest {
         Company company = entityManager.persist(newInstanceCompany());
         Company updatableCompany=newInstanceCompany();
         updatableCompany.setName("Mauricio2");
-        Company foundedCompany=entityManager.find(Company.class,company.getId());
+        
 
         Company savedCompany=repository.save(updatableCompany);
 
