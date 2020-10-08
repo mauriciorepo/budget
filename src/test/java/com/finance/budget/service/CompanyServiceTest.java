@@ -4,7 +4,7 @@ import com.finance.budget.model.Company;
 import com.finance.budget.model.repository.CompanyRepository;
 
 import com.finance.budget.service.Implementation.ImplCompanyService;
-import org.assertj.core.api.Assertions;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
