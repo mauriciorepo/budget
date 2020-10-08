@@ -106,7 +106,7 @@ public class CompanyControllerTest {
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .get(COMPANY_API.concat("/" + id))
                 .accept(MediaType.APPLICATION_JSON);
-                ;
+                
 
         mvc
                 .perform(request)
