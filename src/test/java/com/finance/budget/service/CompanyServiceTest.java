@@ -87,7 +87,7 @@ public class CompanyServiceTest {
     @Test
     @DisplayName("should return a null company")
     public void CompanyNotFoundedTest(){
-        //Company company=;
+
         Long id=1L;
 
         Mockito.when(repository.findById(id)).thenReturn(Optional.empty());

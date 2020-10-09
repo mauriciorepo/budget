@@ -260,7 +260,7 @@ public class CompanyControllerTest {
     @DisplayName("should return list of Companies")
     public void listCompanyTest() throws Exception {
         Company company=createCompany();
-        CompanyDTO dto= createNewCompanyDTO();
+
 
         BDDMockito.given(service.listCompany(Mockito.any(Company.class),Mockito.any(Pageable.class)))
                 .willReturn(new PageImpl<Company>(Arrays.asList(company) , PageRequest.of(0,10),1));
