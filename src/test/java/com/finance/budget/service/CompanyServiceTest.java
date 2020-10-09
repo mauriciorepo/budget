@@ -3,7 +3,7 @@ package com.finance.budget.service;
 import com.finance.budget.model.Company;
 import com.finance.budget.model.repository.CompanyRepository;
 
-import com.finance.budget.service.Implementation.ImplCompanyService;
+import com.finance.budget.service.implementation.ImplCompanyService;
 
 
 import org.junit.jupiter.api.BeforeEach;
@@ -29,10 +29,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CompanyServiceTest {
 
     @MockBean
-    CompanyService service;
+    private CompanyService service;
 
     @MockBean
-    CompanyRepository repository;
+    private CompanyRepository repository;
 
     @BeforeEach
     void setUp(){

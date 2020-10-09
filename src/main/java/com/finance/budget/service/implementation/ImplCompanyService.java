@@ -1,4 +1,4 @@
-package com.finance.budget.service.Implementation;
+package com.finance.budget.service.implementation;
 
 import com.finance.budget.model.Company;
 import com.finance.budget.model.repository.CompanyRepository;
