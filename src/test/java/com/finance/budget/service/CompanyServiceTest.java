@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 public class CompanyServiceTest {
 
-
+    @MockBean
     CompanyService service;
 
     @MockBean

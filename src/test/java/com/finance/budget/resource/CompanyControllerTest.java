@@ -31,6 +31,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.Arrays;
 import java.util.Optional;
 
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 
@@ -67,8 +69,8 @@ public class CompanyControllerTest {
 
 
         mvc.perform(request)
-                .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("id").value("1"));
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("id").value("1"));
 
 
     }
@@ -83,9 +85,6 @@ public class CompanyControllerTest {
 
 
         String json= new ObjectMapper().writeValueAsString(new CompanyDTO());
-        //BDDMockito.given(service.create(Mockito.any(Company.class))).willThrow(NullPointerException.class);
-
-        //BDDMockito.given(service.create(Mockito.any(Company.class))).willReturn(new Company());
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post(COMPANY_API)
                 .accept(MediaType.APPLICATION_JSON)
@@ -94,8 +93,8 @@ public class CompanyControllerTest {
 
         mvc
                 .perform(request)
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("errors", Matchers.hasSize(7)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("errors", hasSize(7)))
 
         ;
 
@@ -116,8 +115,8 @@ public class CompanyControllerTest {
 
         mvc
                 .perform(request)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("id").value("1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("id").value("1"))
         ;
 
     }
@@ -138,7 +137,7 @@ public class CompanyControllerTest {
 
         mvc
                 .perform(request)
-                .andExpect(MockMvcResultMatchers.status().isNotFound());
+                .andExpect(status().isNotFound());
 
     }
 
@@ -156,7 +155,7 @@ public class CompanyControllerTest {
                 .delete(COMPANY_API.concat("/" + id));
 
         mvc.perform(request)
-                .andExpect(MockMvcResultMatchers.status().isNoContent());
+                .andExpect(status().isNoContent());
 
 
     }
@@ -171,7 +170,7 @@ public class CompanyControllerTest {
                 .delete(COMPANY_API.concat("/" + id));
 
         mvc.perform(request)
-                .andExpect(MockMvcResultMatchers.status().isNotFound());
+                .andExpect(status().isNotFound());
     }
 
 
@@ -200,10 +199,10 @@ public class CompanyControllerTest {
                 ;
 
         mvc.perform(request)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("id").value("1"))
-                .andExpect(MockMvcResultMatchers.jsonPath("account").value("Banco of brazil2"))
-                .andExpect(MockMvcResultMatchers.jsonPath("cellphone").value("9840065372"));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("id").value("1"))
+                .andExpect(jsonPath("account").value("Banco of brazil2"))
+                .andExpect(jsonPath("cellphone").value("9840065372"));
 
 
 
@@ -230,7 +229,7 @@ public class CompanyControllerTest {
 
         mvc
                 .perform(request)
-                .andExpect(MockMvcResultMatchers.status().isNotFound());
+                .andExpect(status().isNotFound());
 
     }
 
@@ -254,7 +253,7 @@ public class CompanyControllerTest {
 
         mvc
                 .perform(request)
-                .andExpect(MockMvcResultMatchers.status().isConflict());
+                .andExpect(status().isConflict());
     }
 
     @Test
@@ -268,11 +267,13 @@ public class CompanyControllerTest {
 
         String queryString=String.format("?name=%s&contactName=%s&page=0&size=100",company.getName(),company.getContactName());
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get(COMPANY_API.concat(queryString)).accept(MediaType.APPLICATION_JSON);
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get(COMPANY_API.concat(queryString))
+                .accept(MediaType.APPLICATION_JSON);
 
         mvc.perform(request)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("content",Matchers.hasSize(1)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("content", hasSize(1)))
                 .andExpect(jsonPath("totalElements").value(1))
                 .andExpect(jsonPath("pageable.pageSize").value(100))
                 .andExpect(jsonPath("pageable.pageNumber").value(0));
