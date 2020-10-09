@@ -7,15 +7,21 @@ import com.finance.budget.service.CompanyService;
 import io.swagger.annotations.ApiOperation;
 
 import lombok.RequiredArgsConstructor;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-
+import java.util.stream.Collectors;
+import java.util.List;
 @RestController()
 @RequestMapping("/api/companies")
 @RequiredArgsConstructor
@@ -74,4 +80,17 @@ public class CompanyController {
 
     }
 
+    @GetMapping()
+    public Page<CompanyDTO> listCompany( CompanyDTO dto, Pageable pageRequest){
+        Company filter= modelMapper.map(dto, Company.class);
+
+        Page<Company> result= companyService.listCompany(filter, pageRequest);
+
+      List list= result.getContent()
+                .stream()
+                .map(entity->modelMapper.map(entity,CompanyDTO.class))
+                .collect(Collectors.toList());
+
+      return new PageImpl<CompanyDTO>(list,pageRequest,result.getTotalElements());
+    }
 }

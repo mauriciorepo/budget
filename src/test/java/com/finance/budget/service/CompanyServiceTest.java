@@ -5,6 +5,7 @@ import com.finance.budget.model.repository.CompanyRepository;
 
 import com.finance.budget.service.Implementation.ImplCompanyService;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -143,6 +148,25 @@ public class CompanyServiceTest {
     }
 
 
+    @Test
+    @DisplayName("should return a list of company")
+    public void listCompanyTest(){
+        Company company=newInstanceCompany();
+
+        PageRequest pageRequest=PageRequest.of(0,10);
+        Page<Company> page= new PageImpl<>(java.util.Arrays.asList(company),pageRequest,1);
+
+        Mockito.when(repository.findAll(Mockito.any(Example.class),Mockito.any(PageRequest.class))).thenReturn(page);
+
+        Page<Company> pageResult= service.listCompany(company,pageRequest);
+
+        assertThat(pageResult.getTotalElements()).isEqualTo(1);
+        assertThat(pageResult.getTotalPages()).isEqualTo(1);
+        assertThat(pageResult.getPageable().getPageSize()).isEqualTo(10);
+        assertThat(pageResult.getPageable().isPaged()).isTrue();
+
+
+    }
 
 
     private Company newInstanceCompany(){
