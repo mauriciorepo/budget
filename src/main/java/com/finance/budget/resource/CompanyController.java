@@ -2,7 +2,7 @@ package com.finance.budget.resource;
 
 
 import com.finance.budget.model.Company;
-import com.finance.budget.model.dto.CompanyDTO;
+import com.finance.budget.resource.dto.CompanyDTO;
 import com.finance.budget.service.CompanyService;
 import io.swagger.annotations.ApiOperation;
 
@@ -38,6 +38,7 @@ public class CompanyController {
 
     private final CompanyService companyService;
     private final ModelMapper modelMapper;
+
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

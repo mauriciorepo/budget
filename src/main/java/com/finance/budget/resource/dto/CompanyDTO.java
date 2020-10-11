@@ -1,4 +1,4 @@
-package com.finance.budget.model.dto;
+package com.finance.budget.resource.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

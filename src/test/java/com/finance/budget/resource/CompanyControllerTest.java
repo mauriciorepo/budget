@@ -5,7 +5,7 @@ package com.finance.budget.resource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finance.budget.model.Company;
 
-import com.finance.budget.model.dto.CompanyDTO;
+import com.finance.budget.resource.dto.CompanyDTO;
 import com.finance.budget.service.CompanyService;
 
 import org.junit.jupiter.api.DisplayName;
@@ -38,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest
+@WebMvcTest(controllers = CompanyController.class)
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 
