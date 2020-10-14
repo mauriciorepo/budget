@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import com.finance.budget.model.User;
 import com.finance.budget.resource.dto.UserDto;
 import com.finance.budget.service.UserService;
+import com.finance.budget.service.implementation.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final ModelMapper modelMapper;
-    private final UserService service;
+    private final UserServiceImpl service;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)

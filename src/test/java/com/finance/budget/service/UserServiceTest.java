@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -21,7 +22,11 @@ public class UserServiceTest {
     @MockBean
     private UserRepository repository;
 
-    private UserService service;
+
+
+    private UserServiceImpl service;
+
+
 
     @BeforeEach
     void setUp(){
@@ -51,6 +56,7 @@ public class UserServiceTest {
                 .email("fakeemail@gmail.com")
                 .build();
     }
+
 
 
 }

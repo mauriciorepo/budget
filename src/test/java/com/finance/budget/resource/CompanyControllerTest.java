@@ -1,13 +1,11 @@
 package com.finance.budget.resource;
 
-
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finance.budget.model.Company;
-
 import com.finance.budget.resource.dto.CompanyDTO;
 import com.finance.budget.service.CompanyService;
-
+import com.finance.budget.service.implementation.UserServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,18 +19,16 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-
 import java.util.Arrays;
 import java.util.Optional;
-
-
 import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -43,6 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 
 
+
 public class CompanyControllerTest {
 
     private static final String COMPANY_API="/api/companies";
@@ -50,10 +47,55 @@ public class CompanyControllerTest {
     @MockBean
     private CompanyService service;
 
+    @MockBean
+    private UserServiceImpl userService;
+
     @Autowired
     MockMvc mvc;
 
+
+    @BeforeEach
+    public void setUp(){
+
+
+       /* User user= User
+                .builder()
+                .email("mauricio@gmail.com")
+                .login("mauricio")
+                .password("123")
+                .role("USER")
+                .build();
+        entityManager.persist(user);*/
+
+    }
+
+
+    /*private String obtainAccessToken(String username, String password) throws Exception {
+
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("grant_type", "password");
+        params.add("client_id", "budget");
+        params.add("username", username);
+        params.add("password", password);
+
+        ResultActions result
+                = mvc.perform(post("/oauth/token")
+                .params(params)
+                .with(httpBasic("budget","@123"))
+                .accept("application/json;charset=UTF-8"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"));
+
+        String resultString = result.andReturn().getResponse().getContentAsString();
+
+        JacksonJsonParser jsonParser = new JacksonJsonParser();
+        return jsonParser.parseMap(resultString).get("access_token").toString();
+    }*/
+
+
     @Test
+    @WithMockUser(username="mauricio")
+
     @DisplayName("should create a company")
     public void createCompanyTest() throws Exception {
         CompanyDTO dto= createNewCompanyDTO();
@@ -63,9 +105,11 @@ public class CompanyControllerTest {
 
         BDDMockito.given(service.create(Mockito.any(Company.class))).willReturn(company);
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post(COMPANY_API)
+        //String accessToken = obtainAccessToken("mauricio", "123");
+        MockHttpServletRequestBuilder request = post(COMPANY_API)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
+          //      .header("Authorization", "Bearer " + accessToken)
                 .content(json);
 
 
@@ -81,13 +125,15 @@ public class CompanyControllerTest {
 
 
     @Test
+    @WithMockUser(username="mauricio")
+
     @DisplayName("should return Business exception when companies is null")
     public void createInvalidCompanyTest() throws Exception {
 
 
         String json= new ObjectMapper().writeValueAsString(new CompanyDTO());
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post(COMPANY_API)
+        MockHttpServletRequestBuilder request = post(COMPANY_API)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json);
@@ -103,6 +149,8 @@ public class CompanyControllerTest {
 
     @Test
     @DisplayName("should return company")
+    @WithMockUser(username="mauricio")
+
     public void shouldFindCompanyByIdTest() throws Exception {
         Company company=createCompany();
         Long id=1L;
