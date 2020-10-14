@@ -86,7 +86,7 @@ public class CompanyServiceTest {
 
     @Test
     @DisplayName("should return a null company")
-    public void CompanyNotFoundedTest(){
+    public void companyNotFoundedTest(){
 
         Long id=1L;
 

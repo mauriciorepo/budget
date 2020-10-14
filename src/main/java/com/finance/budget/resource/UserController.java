@@ -4,7 +4,7 @@ import javax.validation.Valid;
 
 import com.finance.budget.model.User;
 import com.finance.budget.resource.dto.UserDto;
-import com.finance.budget.service.UserService;
+
 import com.finance.budget.service.implementation.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
