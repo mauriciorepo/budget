@@ -94,7 +94,7 @@ public class CompanyControllerTest {
 
 
     @Test
-    @WithMockUser(username="mauricio")
+    //@WithMockUser(username="mauricio")
 
     @DisplayName("should create a company")
     public void createCompanyTest() throws Exception {

@@ -22,7 +22,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/swagger-ui.html",
                         "/webjars/**").permitAll()
                 .anyRequest().denyAll();
-        ;
+
     }
 
 }
