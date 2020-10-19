@@ -94,6 +94,7 @@ public class UserControllerTest {
                 .login("mauricio")
                 .password("123")
                 .email("fakeemail@gmail.com")
+                .role("USER")
                 .build();
     }
 

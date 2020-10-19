@@ -58,15 +58,6 @@ public class CompanyControllerTest {
     public void setUp(){
 
 
-       /* User user= User
-                .builder()
-                .email("mauricio@gmail.com")
-                .login("mauricio")
-                .password("123")
-                .role("USER")
-                .build();
-        entityManager.persist(user);*/
-
     }
 
 
@@ -94,8 +85,6 @@ public class CompanyControllerTest {
 
 
     @Test
-    //@WithMockUser(username="mauricio")
-
     @DisplayName("should create a company")
     public void createCompanyTest() throws Exception {
         CompanyDTO dto= createNewCompanyDTO();
@@ -105,7 +94,7 @@ public class CompanyControllerTest {
 
         BDDMockito.given(service.create(Mockito.any(Company.class))).willReturn(company);
 
-        //String accessToken = obtainAccessToken("mauricio", "123");
+
         MockHttpServletRequestBuilder request = post(COMPANY_API)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
