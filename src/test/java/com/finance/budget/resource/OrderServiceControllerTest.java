@@ -134,7 +134,7 @@ public class OrderServiceControllerTest {
 
         mvc.perform(request)
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("errors", hasSize(4)))
+                .andExpect(jsonPath("errors", hasSize(3)))
         ;
 
     }

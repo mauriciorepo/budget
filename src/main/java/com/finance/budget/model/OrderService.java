@@ -11,13 +11,17 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotNull;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Formatter;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 
 
 @Data
@@ -57,9 +61,10 @@ public class OrderService {
 
         Long size=4-this.company.getId();
         String number=this.company.getId()+"";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY");
 
-
-        this.setOrderNumber(String.format(number, "0"+size+"0d"));
+       // StringUtils.leftPad()
+        this.setOrderNumber(String.format("%0"+(4-this.company.getId().toString().length())+"d%s",0,number ).concat(this.getId()+"").concat(LocalDate.now().format(formatter)+""));
                 //.concat(this.getId()+"").concat(LocalDate.now().getYear()+""));
     }
     @PrePersist
