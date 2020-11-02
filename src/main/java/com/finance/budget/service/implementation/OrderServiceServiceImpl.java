@@ -43,7 +43,7 @@ public class OrderServiceServiceImpl implements OrderServiceService {
         if(orderService.getId()==null || orderService ==null){
             throw new IllegalArgumentException("Order does not exist");
         }
-         orderServiceRepository.saveAndFlush(orderService);
+         orderServiceRepository.save(orderService);
         return orderService;
     }
 

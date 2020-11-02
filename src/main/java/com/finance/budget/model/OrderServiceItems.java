@@ -1,6 +1,7 @@
 package com.finance.budget.model;
 
-import javax.persistence.CascadeType;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,10 +31,13 @@ public class OrderServiceItems {
     private Long quantity;
 
     private String scopeTitle;
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
+     @Column()
+    private int numItem;
+    @ManyToOne
     @JoinColumn(name="ORDERSERVICE_ID" )
     @JsonBackReference
+
     private OrderService orderService;
+
     private double value;
 }

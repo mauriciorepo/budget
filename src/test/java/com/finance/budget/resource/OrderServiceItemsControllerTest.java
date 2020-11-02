@@ -1,6 +1,7 @@
 package com.finance.budget.resource;
 
 import com.finance.budget.model.OrderService;
+import com.finance.budget.service.OrderServiceItemsService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @WebMvcTest(controllers = OrderServiceItemsController.class)
 public class OrderServiceItemsControllerTest {
 
+    OrderServiceItemsService orderServiceItemsService;
     /*@Test
     @DisplayName("should return order service items updated")
     public void updateOrderServiceItemsTest(){

@@ -1,6 +1,6 @@
 package com.finance.budget.model.repository;
 
-import java.util.Arrays;
+
 
 import static com.finance.budget.resource.OrderServiceControllerTest.newOrderServiceInstance;
 import com.finance.budget.model.OrderService;
@@ -21,7 +21,7 @@ public class OrderServiceRepositoryTest {
     @DisplayName("should persist and retrun a order service with itmes")
     public void persistOrderService(){
 
-        OrderService orderService=newOrderServiceInstance();
+        // OrderService orderService=newOrderServiceInstance();
 
 
     }

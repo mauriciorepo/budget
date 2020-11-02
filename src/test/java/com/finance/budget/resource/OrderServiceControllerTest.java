@@ -1,10 +1,12 @@
 package com.finance.budget.resource;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasSize;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -16,6 +18,7 @@ import com.finance.budget.model.OrderServiceItems;
 import com.finance.budget.resource.dto.OrderServiceDTO;
 import com.finance.budget.resource.dto.OrderServiceItemsDTO;
 import com.finance.budget.service.CompanyService;
+import com.finance.budget.service.OrderServiceItemsService;
 import com.finance.budget.service.OrderServiceService;
 import com.finance.budget.service.implementation.UserServiceImpl;
 import io.swagger.annotations.ApiOperation;
@@ -63,6 +66,12 @@ public class OrderServiceControllerTest {
 
     @MockBean
     private OrderServiceService service;
+
+    @MockBean
+    private OrderServiceItemsService orderServiceItemsService;
+    @MockBean
+    private OrderService orderServiceMock;
+
 
 
     @Test
@@ -185,6 +194,7 @@ public class OrderServiceControllerTest {
 
         BDDMockito.given(companyService.getById(Mockito.anyLong())).willReturn(Optional.of(company));
         BDDMockito.given(service.getById(id)).willReturn(Optional.of(orderService));
+        //BDDMockito.given(orderServiceMock.updateItems(Mockito.anyList())).willReturn(orderService.getList());
         BDDMockito.given(service.update(Mockito.any(OrderService.class))).willReturn(orderService);
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
@@ -203,7 +213,7 @@ public class OrderServiceControllerTest {
         ;
     }
     @Test
-    @DisplayName("should return status created when OrderService is updated")
+    @DisplayName("should return status conflict when try to update OrderService")
     public void updateOrderServiceWithConflictTest() throws Exception {
         Long id=1L;
         Company company=newInstanceCompany();
@@ -215,9 +225,9 @@ public class OrderServiceControllerTest {
 
         String json=new ObjectMapper().writeValueAsString(orderServiceDTO);
 
-        BDDMockito.given(companyService.getById(Mockito.anyLong())).willReturn(Optional.of(company));
-        BDDMockito.given(service.getById(id)).willReturn(Optional.of(orderService));
-        BDDMockito.given(service.update(Mockito.any(OrderService.class))).willReturn(orderService);
+        //BDDMockito.given(companyService.getById(Mockito.anyLong())).willReturn(Optional.of(company));
+        //BDDMockito.given(service.getById(id)).willReturn(Optional.of(orderService));
+        //BDDMockito.given(service.update(Mockito.any(OrderService.class))).willReturn(orderService);
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .put(ORDER_SERVICE_API.concat("/"+id))
@@ -268,7 +278,7 @@ public class OrderServiceControllerTest {
                 .description("Observation about material price and something like that")
                 .registrationDate(LocalDate.now())
                 .status("Em concorrencia")
-                .list(Arrays.asList(createNewOrderServiceItems()))
+                .list(new ArrayList<OrderServiceItems>(Arrays.asList(createNewOrderServiceItems())) )
                 .build();
     }
 
@@ -282,7 +292,8 @@ public class OrderServiceControllerTest {
                 .registrationDate("10032020")
                 .status("Em concorrencia")
                 .id_company(1L)
-                .list(Arrays.asList(createNewOrderServiceItemsDTO()))
+                .list(new ArrayList<OrderServiceItemsDTO>(Arrays.asList(createNewOrderServiceItemsDTO())))
+               // .list(new ArrayList<>().add(createNewOrderServiceItemsDTO())/*Arrays.asList(createNewOrderServiceItemsDTO())*/)
                 .build();
     }
         public static Company newInstanceCompany(){
@@ -312,6 +323,7 @@ public class OrderServiceControllerTest {
                 .quantity(1L)
                 .scopeTitle("1")
                 .value(34.67)
+                .numItem(1)
                 .build();
     }
     static OrderServiceItems createNewOrderServiceItems(){
@@ -320,6 +332,7 @@ public class OrderServiceControllerTest {
                 .description("do something")
                 .quantity(1L)
                 .scopeTitle("1")
+                .numItem(1)
                 .value(25.46)
                 .build();
 

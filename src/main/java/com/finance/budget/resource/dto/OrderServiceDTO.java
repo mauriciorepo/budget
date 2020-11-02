@@ -2,12 +2,12 @@ package com.finance.budget.resource.dto;
 
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.finance.budget.model.OrderServiceItems;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

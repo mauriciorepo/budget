@@ -1,7 +1,7 @@
 package com.finance.budget.model.repository;
 
 import com.finance.budget.model.Company;
-import com.finance.budget.model.OrderServiceItems;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

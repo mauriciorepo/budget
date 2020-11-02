@@ -11,12 +11,13 @@ import com.finance.budget.resource.dto.CompanyDTO;
 import com.finance.budget.resource.dto.OrderServiceDTO;
 import com.finance.budget.resource.dto.OrderServiceItemsDTO;
 import com.finance.budget.service.CompanyService;
+import com.finance.budget.service.OrderServiceItemsService;
 import com.finance.budget.service.OrderServiceService;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
+
 import org.modelmapper.ModelMapper;
 
-import org.modelmapper.PropertyMap;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +46,7 @@ public class OrderServiceController {
     private final CompanyService companyService;
     private final OrderServiceService orderServiceService;
     private final ModelMapper modelMapper;
+    private final OrderServiceItemsService orderServiceItemsService;
 
 
 
@@ -113,46 +115,6 @@ public class OrderServiceController {
        return list;
     }
 
-   /* @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public OrderServiceDTO updateOrderService(@PathVariable  Long id, @RequestBody OrderServiceDTO orderServiceDTO){
-
-
-        if((id!=orderServiceDTO.getId())){
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "different id value");
-        }
-        return  orderServiceService.getById(id).map(
-                orderService-> {
-                    Company company =companyService.getById(orderServiceDTO.getId_company()).get();
-                    //BeanUtils.copyProperties(orderService,orderServiceDTO);
-                    orderService.setAnnotation(orderServiceDTO.getAnnotation());
-                    orderService.setStatus(orderServiceDTO.getStatus());
-                    orderService.setTitle(orderServiceDTO.getTitle());
-
-                    List<OrderServiceItems> items=    orderServiceDTO.getList()
-                            .stream()
-                            .map((entity)->
-                            //entity.setORDERSERVICE_ID(orderServiceDTO.getId())
-                                    modelMapper.map(entity,OrderServiceItems.class)
-
-                            ).collect(Collectors.toList());
-                    //orderService.getList().forEach(entity->entity.setOrderService(orderService));
-                   // orderService.setList(null);
-                    orderService.setList(items);
-                    // orderService.getList().retainAll(items);
-                    System.out.println(items);
-
-                    //orderService.getList().removeIf((entity)-> !entity.contains(orderServiceDTO.getList()));
-                    //orderService.getList().removeIf((entity)-> !orderService.getList().contains(entity));
-
-
-                    //orderService
-                    orderService.setCompany(company);
-                    OrderService updatableOrderService =orderServiceService.update(orderService);
-                    return modelMapper.map(updatableOrderService,OrderServiceDTO.class);
-
-                }).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not exist"));
-    } */
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -161,9 +123,7 @@ public class OrderServiceController {
         if((id!=orderServiceDTO.getId())){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "different id value");
         }
-
         OrderService order=orderServiceService.getById(id).map(orderService-> {
-            //Company company = companyService.getById(orderServiceDTO.getId_company()).get();
             //BeanUtils.copyProperties(orderService,orderServiceDTO);
             orderService.setAnnotation(orderServiceDTO.getAnnotation());
             orderService.setStatus(orderServiceDTO.getStatus());
@@ -175,25 +135,20 @@ public class OrderServiceController {
         List<OrderServiceItems> listItems=orderServiceDTO
                 .getList()
                 .stream()
-                .map(orderServiceItemsDTO-> DTOToOrderserviceItems(orderServiceItemsDTO))
+                .map(orderServiceItemsDTO-> DTOToOrderServiceItems(orderServiceItemsDTO))
                 .collect(Collectors.toList());
-        order.setList(listItems);
-        //order.getList().retainAll(listItems);
+        order.updateItems(listItems);
 
-          OrderService updateOrderService= orderServiceService.update(order);
+        OrderService updateOrderService= orderServiceService.update(order);
 
-         updateOrderService.getList().stream().filter(entity-> !listItems.contains(entity)).forEach(entity-> OrderServiceService.);
-         //System.out.println(order.getList());
-         //order.getList().forEach((entity)-> updateOrderService.removeItem(entity));
-          return OrderServiceToDTO(updateOrderService)/*modelMapper.map(updateOrderService,OrderServiceDTO.class)*/;
-
+        return OrderServiceToDTO(updateOrderService)/*modelMapper.map(updateOrderService,OrderServiceDTO.class)*/;
 
     }
 
 
     private OrderServiceDTO OrderServiceToDTO(OrderService entity){
         modelMapper.typeMap(OrderServiceItems.class,OrderServiceItemsDTO.class ).addMappings(mapper ->{
-            mapper.map(src -> src.getId(),(dest, v) -> dest.setORDERSERVICE_ID((Long) v) );
+            mapper.map(src -> src.getOrderService().getId(),(dest, v) -> dest.setORDERSERVICE_ID((Long) v) );
             //mapper.map(src->  );
         });
 
@@ -205,7 +160,7 @@ public class OrderServiceController {
         return modelMapper.map(entity, OrderServiceDTO.class );
     }
 
-    private OrderServiceItems DTOToOrderserviceItems(OrderServiceItemsDTO dto){
+    private OrderServiceItems DTOToOrderServiceItems(OrderServiceItemsDTO dto){
         modelMapper.typeMap(OrderServiceItemsDTO.class,OrderServiceItems.class ).addMappings(mapper ->{
             mapper.map(src -> src.getORDERSERVICE_ID(),(dest, v) -> dest.getOrderService().setId((Long) v) );
             //mapper.map(src->  );

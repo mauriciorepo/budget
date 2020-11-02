@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -17,8 +18,6 @@ import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -26,7 +25,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.criterion.Order;
+
 
 
 @Data
@@ -47,9 +46,10 @@ public class OrderService {
 
     //@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.MERGE, CascadeType.REMOVE})
     //@JoinColumn(name="ORDERSERVICE_ID" , nullable = false)
-    @OneToMany(mappedBy = "orderService",cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "orderService",cascade = {CascadeType.ALL},orphanRemoval = true)
     @JsonManagedReference
-    public List<OrderServiceItems> list=new ArrayList();
+    @OrderBy("numItem ASC")
+    public List<OrderServiceItems> list=new ArrayList<>();
 
     @NotNull
     private String status;
@@ -80,7 +80,8 @@ public class OrderService {
                 .concat(this.getId()+"")
                 .concat(LocalDate.now().format(formatter)+""));
 
-        OrderService order= OrderService.builder().id(this.getId()).build();
+        //OrderService order= OrderService.builder().id(this.getId()).build();
+
         //List<OrderServiceItems> orderServiceItemsList =this.getList().stream().map(entity-> entity.setOrderService(order)).collect(Collectors.toList());
         //this.setList(orderServiceItemsList);
 
@@ -98,8 +99,14 @@ public class OrderService {
         this.setModified(LocalDate.now());
     }
 
-    public void removeItem(OrderServiceItems item){
-        this.getList().remove(item);
+
+    public void updateItems(List<OrderServiceItems> items){
+        if(this.list == null){
+
+        }else{
+            this.list.retainAll(items);
+            this.list.addAll(items);
+        }
     }
 
 }
