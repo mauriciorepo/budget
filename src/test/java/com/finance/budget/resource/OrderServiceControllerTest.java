@@ -12,7 +12,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finance.budget.model.Company;
 import com.finance.budget.model.OrderService;
+import com.finance.budget.model.OrderServiceItems;
 import com.finance.budget.resource.dto.OrderServiceDTO;
+import com.finance.budget.resource.dto.OrderServiceItemsDTO;
 import com.finance.budget.service.CompanyService;
 import com.finance.budget.service.OrderServiceService;
 import com.finance.budget.service.implementation.UserServiceImpl;
@@ -134,7 +136,7 @@ public class OrderServiceControllerTest {
 
         mvc.perform(request)
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("errors", hasSize(3)))
+                .andExpect(jsonPath("errors", hasSize(2)))
         ;
 
     }
@@ -147,8 +149,6 @@ public class OrderServiceControllerTest {
         orderService.setCompany(newInstanceCompany());
         Long id_company= 1L;
         String name="Company";
-
-
 
         BDDMockito.given(service.findOrderServiceByIdCompany(Mockito.any(Company.class),Mockito.any(Pageable.class)))
                 .willReturn(new PageImpl<OrderService>(Arrays.asList(orderService), PageRequest.of(0,10),1));
@@ -170,8 +170,96 @@ public class OrderServiceControllerTest {
 
     }
 
+    @Test
+    @DisplayName("should return status created when OrderService is updated")
+    public void updateOrderService() throws Exception {
+        Long id=1L;
+        Company company=newInstanceCompany();
+        OrderServiceDTO orderServiceDTO=newOrderServiceDTOInstance();
+        OrderService orderService=newOrderServiceInstance();
+        orderServiceDTO.setId(id);
+        orderService.setId(id);
+        orderService.setCompany(company);
 
-    private OrderService newOrderServiceInstance(){
+        String json=new ObjectMapper().writeValueAsString(orderServiceDTO);
+
+        BDDMockito.given(companyService.getById(Mockito.anyLong())).willReturn(Optional.of(company));
+        BDDMockito.given(service.getById(id)).willReturn(Optional.of(orderService));
+        BDDMockito.given(service.update(Mockito.any(OrderService.class))).willReturn(orderService);
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .put(ORDER_SERVICE_API.concat("/"+id))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("id").value("1"))
+                .andExpect(jsonPath("title").value("First budget"))
+                //.andExpect(jsonPath("date").value("10032020"))
+                .andExpect(jsonPath("annotation").value("Things about the budget"))
+                .andExpect(jsonPath("status").value("Em concorrencia"))
+        ;
+    }
+    @Test
+    @DisplayName("should return status created when OrderService is updated")
+    public void updateOrderServiceWithConflictTest() throws Exception {
+        Long id=1L;
+        Company company=newInstanceCompany();
+        OrderServiceDTO orderServiceDTO=newOrderServiceDTOInstance();
+        OrderService orderService=newOrderServiceInstance();
+        //orderServiceDTO.setId(id);
+        orderService.setId(id);
+        orderService.setCompany(company);
+
+        String json=new ObjectMapper().writeValueAsString(orderServiceDTO);
+
+        BDDMockito.given(companyService.getById(Mockito.anyLong())).willReturn(Optional.of(company));
+        BDDMockito.given(service.getById(id)).willReturn(Optional.of(orderService));
+        BDDMockito.given(service.update(Mockito.any(OrderService.class))).willReturn(orderService);
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .put(ORDER_SERVICE_API.concat("/"+id))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        mvc.perform(request)
+                .andExpect(status().isConflict())
+          ;
+    }
+
+    @Test
+    @DisplayName("should return status created when OrderService is updated")
+    public void updateNotFoundedOrderServiceTest() throws Exception {
+        Long id=1L;
+        Company company=newInstanceCompany();
+        OrderServiceDTO orderServiceDTO=newOrderServiceDTOInstance();
+        OrderService orderService=newOrderServiceInstance();
+        orderServiceDTO.setId(id);
+        orderService.setId(id);
+        orderService.setCompany(company);
+
+        String json=new ObjectMapper().writeValueAsString(orderServiceDTO);
+
+        BDDMockito.given(companyService.getById(Mockito.anyLong())).willReturn(Optional.of(company));
+        BDDMockito.given(service.getById(id)).willReturn(Optional.empty());
+
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .put(ORDER_SERVICE_API.concat("/"+id))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        mvc.perform(request)
+                .andExpect(status().isNotFound())
+        ;
+    }
+
+
+    public static OrderService newOrderServiceInstance(){
 
         return OrderService
                 .builder()
@@ -180,10 +268,11 @@ public class OrderServiceControllerTest {
                 .description("Observation about material price and something like that")
                 .registrationDate(LocalDate.now())
                 .status("Em concorrencia")
+                .list(Arrays.asList(createNewOrderServiceItems()))
                 .build();
     }
 
-    private OrderServiceDTO newOrderServiceDTOInstance(){
+    public static OrderServiceDTO newOrderServiceDTOInstance(){
 
         return OrderServiceDTO
                 .builder()
@@ -193,9 +282,10 @@ public class OrderServiceControllerTest {
                 .registrationDate("10032020")
                 .status("Em concorrencia")
                 .id_company(1L)
+                .list(Arrays.asList(createNewOrderServiceItemsDTO()))
                 .build();
     }
-    private Company newInstanceCompany(){
+        public static Company newInstanceCompany(){
 
         return Company.builder()
                  .id(1l)
@@ -212,5 +302,26 @@ public class OrderServiceControllerTest {
                 .telephone2("558175286586")
                 .registrationDate("100384")
                 .build();
+    }
+
+
+    static OrderServiceItemsDTO createNewOrderServiceItemsDTO(){
+
+        return OrderServiceItemsDTO.builder()
+                .description("do something")
+                .quantity(1L)
+                .scopeTitle("1")
+                .value(34.67)
+                .build();
+    }
+    static OrderServiceItems createNewOrderServiceItems(){
+
+        return OrderServiceItems.builder()
+                .description("do something")
+                .quantity(1L)
+                .scopeTitle("1")
+                .value(25.46)
+                .build();
+
     }
 }

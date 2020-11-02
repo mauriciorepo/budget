@@ -83,7 +83,20 @@ public class CompanyController {
         }
       return  companyService.getById(id).map(
               company-> {
-                  BeanUtils.copyProperties(company,dto);
+                  //BeanUtils.copyProperties(company,dto);
+                  company.setLocalization(dto.getLocalization());
+                  company.setNeighborhood(dto.getNeighborhood());
+                  company.setName(dto.getName());
+                  company.setCellphone(dto.getCellphone());
+                  company.setContactName(dto.getContactName());
+                  company.setCountry(dto.getCountry());
+                  company.setRegistrationDate(dto.getRegistrationDate());
+                  company.setStateRegistration(dto.getStateRegistration());
+                  company.setStateAbbrev(dto.getStateAbbrev());
+                  company.setTelephone(dto.getTelephone());
+                  company.setTelephone2(dto.getTelephone2());
+
+
                   Company updatableCompany =companyService.updateCompany(company);
                   return modelMapper.map(updatableCompany,CompanyDTO.class);
 

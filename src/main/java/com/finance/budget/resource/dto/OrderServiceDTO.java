@@ -4,6 +4,10 @@ package com.finance.budget.resource.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.finance.budget.model.OrderServiceItems;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,15 +26,18 @@ public class OrderServiceDTO {
     @NotEmpty
     private String status;
 
-    @NotNull
+    //@NotNull
     private Long id_company;
 
     private String orderNumber;
 
     private String description;
 
+     private List<OrderServiceItemsDTO> list= new ArrayList();
+
     @NotEmpty
     private String title;
+
 
     private String annotation;
 
