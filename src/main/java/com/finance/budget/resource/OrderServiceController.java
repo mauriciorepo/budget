@@ -11,7 +11,7 @@ import com.finance.budget.resource.dto.CompanyDTO;
 import com.finance.budget.resource.dto.OrderServiceDTO;
 import com.finance.budget.resource.dto.OrderServiceItemsDTO;
 import com.finance.budget.service.CompanyService;
-import com.finance.budget.service.OrderServiceItemsService;
+
 import com.finance.budget.service.OrderServiceService;
 import lombok.RequiredArgsConstructor;
 
@@ -46,7 +46,7 @@ public class OrderServiceController {
     private final CompanyService companyService;
     private final OrderServiceService orderServiceService;
     private final ModelMapper modelMapper;
-    private final OrderServiceItemsService orderServiceItemsService;
+
 
 
 
@@ -98,15 +98,14 @@ public class OrderServiceController {
     public List<OrderServiceDTO> findOrderServiceByIdCompany(@PathVariable Long id){
 
        List<OrderService> listResult= orderServiceService.findByIdCompany(id);
-       //listResult.stream().map(OrderService::getList()).;
-        /*List<OrderServiceDTO> orderServiceDTOList= listResult.stream().map(entity-> {modelMapper.map
-            return null;
-        });*/
-        modelMapper.typeMap(OrderServiceItems.class, OrderServiceItemsDTO.class).addMappings(mapper -> {
-            mapper.map(src -> src.getOrderService().getId(),
-                    OrderServiceItemsDTO::setORDERSERVICE_ID);
 
+        modelMapper.
+                typeMap(OrderServiceItems.class, OrderServiceItemsDTO.class)
+                .addMappings(mapper -> {
+                    mapper.map(src -> src.getOrderService().getId(),
+                    OrderServiceItemsDTO::setORDERSERVICE_ID);
         });
+
         List<OrderServiceDTO> list=listResult
                 .stream()
                 .map(entity->modelMapper.map(entity, OrderServiceDTO.class))
@@ -141,7 +140,7 @@ public class OrderServiceController {
 
         OrderService updateOrderService= orderServiceService.update(order);
 
-        return OrderServiceToDTO(updateOrderService)/*modelMapper.map(updateOrderService,OrderServiceDTO.class)*/;
+        return OrderServiceToDTO(updateOrderService);
 
     }
 
@@ -149,12 +148,12 @@ public class OrderServiceController {
     private OrderServiceDTO OrderServiceToDTO(OrderService entity){
         modelMapper.typeMap(OrderServiceItems.class,OrderServiceItemsDTO.class ).addMappings(mapper ->{
             mapper.map(src -> src.getOrderService().getId(),(dest, v) -> dest.setORDERSERVICE_ID((Long) v) );
-            //mapper.map(src->  );
+
         });
 
         modelMapper.typeMap(OrderService.class,OrderServiceDTO.class ).addMappings(mapper ->{
             mapper.map(src -> src.getCompany().getId(),(dest, v) -> dest.setId_company((Long) v) );
-            //mapper.map(src->  );
+
         });
 
         return modelMapper.map(entity, OrderServiceDTO.class );
@@ -163,7 +162,7 @@ public class OrderServiceController {
     private OrderServiceItems DTOToOrderServiceItems(OrderServiceItemsDTO dto){
         modelMapper.typeMap(OrderServiceItemsDTO.class,OrderServiceItems.class ).addMappings(mapper ->{
             mapper.map(src -> src.getORDERSERVICE_ID(),(dest, v) -> dest.getOrderService().setId((Long) v) );
-            //mapper.map(src->  );
+
         });
         return modelMapper.map(dto,OrderServiceItems.class);
     }

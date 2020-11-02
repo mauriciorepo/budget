@@ -18,7 +18,6 @@ import com.finance.budget.model.OrderServiceItems;
 import com.finance.budget.resource.dto.OrderServiceDTO;
 import com.finance.budget.resource.dto.OrderServiceItemsDTO;
 import com.finance.budget.service.CompanyService;
-import com.finance.budget.service.OrderServiceItemsService;
 import com.finance.budget.service.OrderServiceService;
 import com.finance.budget.service.implementation.UserServiceImpl;
 import io.swagger.annotations.ApiOperation;
@@ -67,8 +66,6 @@ public class OrderServiceControllerTest {
     @MockBean
     private OrderServiceService service;
 
-    @MockBean
-    private OrderServiceItemsService orderServiceItemsService;
     @MockBean
     private OrderService orderServiceMock;
 
@@ -278,6 +275,7 @@ public class OrderServiceControllerTest {
                 .description("Observation about material price and something like that")
                 .registrationDate(LocalDate.now())
                 .status("Em concorrencia")
+                .orderNumber("0001120")
                 .list(new ArrayList<OrderServiceItems>(Arrays.asList(createNewOrderServiceItems())) )
                 .build();
     }
@@ -326,7 +324,7 @@ public class OrderServiceControllerTest {
                 .numItem(1)
                 .build();
     }
-    static OrderServiceItems createNewOrderServiceItems(){
+    public static OrderServiceItems createNewOrderServiceItems(){
 
         return OrderServiceItems.builder()
                 .description("do something")

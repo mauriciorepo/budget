@@ -2,10 +2,15 @@ package com.finance.budget.service;
 
 import java.time.LocalDate;
 
+import static com.finance.budget.resource.OrderServiceControllerTest.createNewOrderServiceItems;
 import static org.assertj.core.api.Assertions.assertThat;
+
 import com.finance.budget.model.Company;
 import com.finance.budget.model.OrderService;
+import com.finance.budget.model.OrderServiceItems;
 import com.finance.budget.model.repository.OrderServiceRepository;
+
+import com.finance.budget.resource.OrderServiceControllerTest;
 import com.finance.budget.service.implementation.OrderServiceServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +20,11 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
@@ -40,7 +50,50 @@ public class OrderServiceServiceTest {
         OrderService saved= orderServiceService.create(orderService);
 
         assertThat(saved).isNotNull();
+        assertThat(saved.getTitle()).isNotNull();
+        assertThat(saved.getCompany()).isNotNull();
+        assertThat(saved.getCompany().getId()).isNotNull();
+        assertThat(saved.getOrderNumber()).isNotNull();
+        assertThat(saved.getOrderNumber()).isEqualTo("0001120");
 
+    }
+
+    @Test
+    @DisplayName("should return a list of OrderService by id company")
+    public void returnOrderServiceByIdCompany(){
+        Long id=1L;
+        List<OrderService> order= Arrays.asList(OrderServiceControllerTest.newOrderServiceInstance());
+
+        Mockito.when(orderServiceRepository.
+                findOrderServiceByIdCompany(Mockito.anyLong()))
+                .thenReturn(order);
+
+        List<OrderService> list=orderServiceService.findByIdCompany(id);
+
+        assertThat(list).isNotNull();
+        assertThat(list.size()).isEqualTo(1);
+        assertThat(list.get(0).getTitle()).isEqualTo("First budget");
+
+        assertThat(list.get(0).getList().size()).isEqualTo(1);
+
+    }
+
+    @Test
+    @DisplayName("should return OrderService updatable")
+    public void returnUpdateOrderService(){
+        Long id=1L;
+        OrderService foundOrder= newOrderServiceInstance();
+        foundOrder.setId(id);
+        foundOrder.setList(new ArrayList<OrderServiceItems>(Arrays.asList(createNewOrderServiceItems())));
+
+        Mockito.when(orderServiceRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(foundOrder));
+        Mockito.when(orderServiceRepository.save(Mockito.any(OrderService.class))).thenReturn(foundOrder);
+        OrderService order=orderServiceService.getById(id).get();
+        OrderService savedOrderService=orderServiceService.update(order);
+
+        assertThat(savedOrderService).isNotNull();
+        assertThat(savedOrderService.getTitle()).isEqualTo("First budget");
+        assertThat(savedOrderService.getList().size()).isEqualTo(1);
     }
 
     private OrderService newOrderServiceInstance(){
@@ -53,6 +106,8 @@ public class OrderServiceServiceTest {
                 .registrationDate(LocalDate.now())
                 .company(newInstanceCompany())
                 .status("Em concorrencia")
+                .orderNumber("0001120")
+
                 .build();
     }
 
