@@ -4,6 +4,7 @@ import com.finance.budget.model.Company;
 import com.finance.budget.model.repository.CompanyRepository;
 
 import com.finance.budget.service.implementation.ImplCompanyService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -143,6 +144,25 @@ public class CompanyServiceTest {
         assertThat(savedCompany).isNotNull();
         assertThat(savedCompany.getId()).isNotNull();
 
+    }
+    @Test
+    @DisplayName("should return an exception when try to update a company with null object")
+    public void returnIllegalArgumentExceptionOnUpdate(){
+        Company company=new Company();
+
+        Assertions.assertThrows(IllegalArgumentException.class,()-> service.updateCompany(company));
+
+        Mockito.verify(repository,Mockito.never()).save(company);
+    }
+    @Test
+    @DisplayName("should return an exception when try to update a company with id null")
+    public void returnIllegalArgumentExceptionOnUpdateWithIdNull(){
+        Company company=new Company();
+        company.setCountry("brazil");
+
+        Assertions.assertThrows(IllegalArgumentException.class,()-> service.updateCompany(company));
+
+        Mockito.verify(repository,Mockito.never()).save(company);
     }
 
 

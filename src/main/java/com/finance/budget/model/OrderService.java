@@ -80,11 +80,6 @@ public class OrderService {
                 .concat(this.getId()+"")
                 .concat(LocalDate.now().format(formatter)+""));
 
-        //OrderService order= OrderService.builder().id(this.getId()).build();
-
-        //List<OrderServiceItems> orderServiceItemsList =this.getList().stream().map(entity-> entity.setOrderService(order)).collect(Collectors.toList());
-        //this.setList(orderServiceItemsList);
-
     }
 
 

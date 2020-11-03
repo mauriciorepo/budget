@@ -20,6 +20,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -57,12 +61,13 @@ public class OrderServiceServiceTest {
         assertThat(saved.getCompany().getId()).isNotNull();
         assertThat(saved.getOrderNumber()).isNotNull();
         assertThat(saved.getOrderNumber()).isEqualTo("0001120");
+        assertThat(saved.getRegistrationDate()).isEqualTo(LocalDate.now());
 
     }
 
     @Test
     @DisplayName("should return a list of OrderService by id company")
-    public void returnOrderServiceByIdCompany(){
+    public void returnOrderServiceByIdCompanyTest(){
         Long id=1L;
         List<OrderService> order= Arrays.asList(OrderServiceControllerTest.newOrderServiceInstance());
 
@@ -82,7 +87,7 @@ public class OrderServiceServiceTest {
 
     @Test
     @DisplayName("should return OrderService updatable")
-    public void returnUpdateOrderService(){
+    public void returnUpdateOrderServiceTest(){
         Long id=1L;
         OrderService foundOrder= newOrderServiceInstance();
         foundOrder.setId(id);
@@ -99,13 +104,44 @@ public class OrderServiceServiceTest {
     }
 
     @Test
-    @DisplayName("should return an exception when try to update OrderService with id or object null")
-    public void shouldReturnExceptionUpdateOrderService(){
+    @DisplayName("should return an exception when try to update OrderService with  object null")
+    public void shouldReturnExceptionUpdateOrderServiceTest(){
         OrderService orderService =new OrderService();
-        Mockito.when(orderServiceRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+
         org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class, ()-> orderServiceService.update(orderService));
 
         Mockito.verify(orderServiceRepository,Mockito.never()).save(orderService);
+
+    }
+    @Test
+    @DisplayName("should return an exception when try to update OrderService with  object null")
+    public void shouldReturnExceptionUpdateOrderServiceWithIdNullTest(){
+        OrderService orderService =new OrderService();
+        orderService.setTitle("title");
+
+        org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class, ()-> orderServiceService.update(orderService));
+
+        Mockito.verify(orderServiceRepository,Mockito.never()).save(orderService);
+
+    }
+    @Test
+    @DisplayName("should return pageable of oreder service")
+    public void returnPageOrderServiceTest(){
+        Long id=1L;
+        OrderService order=newOrderServiceInstance();
+        Company company=newInstanceCompany();
+
+        PageRequest pageRequest= PageRequest.of(0, 10);
+        Page<OrderService> page=new PageImpl<>(Arrays.asList(order),pageRequest,1);
+
+        Mockito.when(orderServiceRepository.findOrderServiceByIdCompanyOrName(Mockito.anyLong(),Mockito.any(String.class),Mockito.any(PageRequest.class))).thenReturn(page);
+
+        Page<OrderService> pageResult=orderServiceService.findOrderServiceByIdCompany(company,pageRequest);
+
+        assertThat(pageResult.getTotalElements()).isEqualTo(1);
+        assertThat(pageResult.getTotalPages()).isEqualTo(1);
+        assertThat(pageResult.getPageable().getPageSize()).isEqualTo(10);
+        assertThat(pageResult.getPageable().isPaged()).isTrue();
 
     }
 
