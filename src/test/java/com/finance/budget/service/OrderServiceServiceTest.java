@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import static com.finance.budget.resource.OrderServiceControllerTest.createNewOrderServiceItems;
 import static org.assertj.core.api.Assertions.assertThat;
 
+
+
 import com.finance.budget.model.Company;
 import com.finance.budget.model.OrderService;
 import com.finance.budget.model.OrderServiceItems;
@@ -94,6 +96,17 @@ public class OrderServiceServiceTest {
         assertThat(savedOrderService).isNotNull();
         assertThat(savedOrderService.getTitle()).isEqualTo("First budget");
         assertThat(savedOrderService.getList().size()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("should return an exception when try to update OrderService with id or object null")
+    public void shouldReturnExceptionUpdateOrderService(){
+        OrderService orderService =new OrderService();
+        Mockito.when(orderServiceRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+        org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class, ()-> orderServiceService.update(orderService));
+
+        Mockito.verify(orderServiceRepository,Mockito.never()).save(orderService);
+
     }
 
     private OrderService newOrderServiceInstance(){
