@@ -75,7 +75,7 @@ public class OrderServiceController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<OrderServiceDTO> findOrderService(CompanyDTO companyDTO, Pageable pageRequest){
+    public Page<OrderServiceDTO> findOrderServiceByIdCompany(CompanyDTO companyDTO, Pageable pageRequest){
         Company company= modelMapper.map(companyDTO, Company.class);
 
         Page<OrderService> resultList=orderServiceService.findOrderServiceByIdCompany(company, pageRequest);
@@ -95,7 +95,7 @@ public class OrderServiceController {
 
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<OrderServiceDTO> findOrderServiceByIdCompany(@PathVariable Long id){
+    public List<OrderServiceDTO> findOrderService(@PathVariable Long id){
 
        List<OrderService> listResult= orderServiceService.findByIdCompany(id);
 

@@ -148,6 +148,19 @@ public class OrderServiceControllerTest {
     }
 
     @Test
+    @DisplayName("should return a list of OrderService by id company")
+    public void shouldReturnAListOfOrderService() throws Exception {
+        Long id=1L;
+        OrderService order=newOrderServiceInstance();
+        BDDMockito.given(service.findByIdCompany(Mockito.anyLong())).willReturn(Arrays.asList(order));
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get(ORDER_SERVICE_API.concat("/" + id))
+                .accept(MediaType.APPLICATION_JSON);
+
+        mvc.perform(request).andExpect(status().isOk());
+
+    }
+    @Test
     @DisplayName("should return order service by id company")
     public void findOrderServiceByIdCompanyTest() throws Exception {
         OrderService orderService=newOrderServiceInstance();
@@ -222,9 +235,6 @@ public class OrderServiceControllerTest {
 
         String json=new ObjectMapper().writeValueAsString(orderServiceDTO);
 
-        //BDDMockito.given(companyService.getById(Mockito.anyLong())).willReturn(Optional.of(company));
-        //BDDMockito.given(service.getById(id)).willReturn(Optional.of(orderService));
-        //BDDMockito.given(service.update(Mockito.any(OrderService.class))).willReturn(orderService);
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .put(ORDER_SERVICE_API.concat("/"+id))
@@ -253,7 +263,6 @@ public class OrderServiceControllerTest {
         BDDMockito.given(companyService.getById(Mockito.anyLong())).willReturn(Optional.of(company));
         BDDMockito.given(service.getById(id)).willReturn(Optional.empty());
 
-
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .put(ORDER_SERVICE_API.concat("/"+id))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -264,6 +273,26 @@ public class OrderServiceControllerTest {
                 .andExpect(status().isNotFound())
         ;
     }
+
+  /*  @Test
+    @ApiOperation("find Order Service by id")
+    @DisplayName("should return OrderService updatable")
+    public void shouldReturnAPageableOfOrderService(){
+
+        Long id=1L;
+
+        OrderService orderService=newOrderServiceInstance();
+        orderService.setId(id);
+        BDDMockito.given(service.getById(Mockito.anyLong())).willReturn(Optional.of(orderService));
+
+        String json=new  ObjectMapper().writeValueAsString()
+        MockMvcRequestBuilders.put(ORDER_SERVICE_API.concat("/"+id))
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content()
+        ;
+
+    }*/
 
 
     public static OrderService newOrderServiceInstance(){
