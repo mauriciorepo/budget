@@ -31,6 +31,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.stream.Collectors;
 import java.util.List;
+
 @RestController
 @RequestMapping("/api/companies")
 @RequiredArgsConstructor
@@ -95,6 +96,7 @@ public class CompanyController {
                   company.setStateAbbrev(dto.getStateAbbrev());
                   company.setTelephone(dto.getTelephone());
                   company.setTelephone2(dto.getTelephone2());
+                  company.setSituation(dto.isSituation());
 
 
                   Company updatableCompany =companyService.updateCompany(company);

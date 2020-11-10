@@ -48,5 +48,8 @@ public class Company {
 
     private String registrationDate;
 
+    private boolean situation;
+
+
 
 }

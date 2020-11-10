@@ -45,6 +45,10 @@ public class CompanyDTO {
 
         private String account;
 
-        @NotEmpty
+        //@NotEmpty
         private String registrationDate;
+
+        private boolean situation;
+
+
 }

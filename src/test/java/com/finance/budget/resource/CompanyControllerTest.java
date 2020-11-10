@@ -130,7 +130,7 @@ public class CompanyControllerTest {
         mvc
                 .perform(request)
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("errors", hasSize(7)))
+                .andExpect(jsonPath("errors", hasSize(6)))
 
         ;
 
