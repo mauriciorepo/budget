@@ -14,7 +14,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/api/users","/h2-console/**").permitAll()
-                .antMatchers("/api/companies/**","/api/orders-service/**").authenticated()
+                .antMatchers("/api/companies/**","/api/orders-service/**").permitAll()//authenticated()
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
                         "/swagger-resources/**",

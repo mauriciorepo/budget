@@ -33,7 +33,7 @@ public class CompanyDTO {
         @NotEmpty
         private String cellphone;
 
-        @NotEmpty
+        //@NotEmpty
         private String country;
 
         private String stateRegistration;
@@ -41,7 +41,7 @@ public class CompanyDTO {
         private String neighborhood;
 
         @NotEmpty//uf
-        private String StateAbbrev;
+        private String stateAbbrev;
 
         private String account;
 
@@ -49,6 +49,8 @@ public class CompanyDTO {
         private String registrationDate;
 
         private boolean situation;
+
+        private String email;
 
 
 }

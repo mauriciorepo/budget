@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -65,4 +66,11 @@ public class ImplCompanyService implements CompanyService {
 
         return repository.findAll(example,page);
     }
+
+    @Override
+    public List<Company> findCompanyList() {
+        return repository.findAll();
+    }
+
+
 }

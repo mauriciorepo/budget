@@ -2,8 +2,7 @@ package com.finance.budget.model.repository;
 
 
 
-import static com.finance.budget.resource.OrderServiceControllerTest.newOrderServiceInstance;
-import com.finance.budget.model.OrderService;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

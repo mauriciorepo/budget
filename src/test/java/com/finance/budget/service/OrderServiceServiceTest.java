@@ -172,7 +172,7 @@ public class OrderServiceServiceTest {
                 .localization("park avenue")
                 .name("Mauricio")
                 .neighborhood("Casa Forte")
-                .StateAbbrev("PE")
+                .stateAbbrev("PE")
                 .telephone("558175286586")
                 .telephone2("558175286586")
                 .registrationDate("100384")

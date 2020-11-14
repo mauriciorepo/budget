@@ -42,13 +42,15 @@ public class Company {
     private String neighborhood;
 
     //uf
-    private String StateAbbrev;
+    private String stateAbbrev;
 
     private String account;
 
     private String registrationDate;
 
     private boolean situation;
+
+    private String email;
 
 
 

@@ -130,7 +130,7 @@ public class CompanyControllerTest {
         mvc
                 .perform(request)
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("errors", hasSize(6)))
+                .andExpect(jsonPath("errors", hasSize(5)))
 
         ;
 
@@ -326,7 +326,7 @@ public class CompanyControllerTest {
                 .localization("park avenue")
                 .name("Mauricio")
                 .neighborhood("Casa Forte")
-                .StateAbbrev("PE")
+                .stateAbbrev("PE")
                 .telephone("558175286586")
                 .telephone2("558175286586")
                 .registrationDate("100384")
@@ -345,7 +345,7 @@ public class CompanyControllerTest {
                 .localization("park avenue")
                 .name("Mauricio")
                 .neighborhood("Casa Forte")
-                .StateAbbrev("PE")
+                .stateAbbrev("PE")
                 .telephone("558175286586")
                 .telephone2("558175286586")
                 .registrationDate("")

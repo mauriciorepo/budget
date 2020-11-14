@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +36,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/companies")
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:4200")
 public class CompanyController {
 
     private final CompanyService companyService;
@@ -118,5 +120,11 @@ public class CompanyController {
                 .collect(Collectors.toList());
 
       return new PageImpl<CompanyDTO>(list,pageRequest,result.getTotalElements());
+    }
+
+    @GetMapping("/all")
+    public List<CompanyDTO> getAllCompany(){
+        List list=companyService.findCompanyList();
+       return (List<CompanyDTO>) list.stream().map(entity->modelMapper.map(entity, CompanyDTO.class)).collect(Collectors.toList());
     }
 }
