@@ -19,7 +19,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
+//import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -61,27 +61,6 @@ public class CompanyControllerTest {
     }
 
 
-    /*private String obtainAccessToken(String username, String password) throws Exception {
-
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("grant_type", "password");
-        params.add("client_id", "budget");
-        params.add("username", username);
-        params.add("password", password);
-
-        ResultActions result
-                = mvc.perform(post("/oauth/token")
-                .params(params)
-                .with(httpBasic("budget","@123"))
-                .accept("application/json;charset=UTF-8"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"));
-
-        String resultString = result.andReturn().getResponse().getContentAsString();
-
-        JacksonJsonParser jsonParser = new JacksonJsonParser();
-        return jsonParser.parseMap(resultString).get("access_token").toString();
-    }*/
 
 
     @Test
@@ -114,7 +93,7 @@ public class CompanyControllerTest {
 
 
     @Test
-    @WithMockUser(username="mauricio")
+    //@WithMockUser(username="mauricio")
 
     @DisplayName("should return Business exception when companies is null")
     public void createInvalidCompanyTest() throws Exception {
@@ -138,7 +117,7 @@ public class CompanyControllerTest {
 
     @Test
     @DisplayName("should return company")
-    @WithMockUser(username="mauricio")
+   // @WithMockUser(username="mauricio")
 
     public void shouldFindCompanyByIdTest() throws Exception {
         Company company=createCompany();

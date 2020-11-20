@@ -49,9 +49,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients
                 .inMemory()
                 .withClient("budget")
-                .secret("@123")
+                .secret("ZXNAcXMyMDE1")
                 .scopes("read ","write")
                 .authorizedGrantTypes("password")
-                .accessTokenValiditySeconds(60 * 120);
+                .accessTokenValiditySeconds(60 * 120)
+
+        ;
     }
 }

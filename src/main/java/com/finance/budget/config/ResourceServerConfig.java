@@ -2,6 +2,7 @@ package com.finance.budget.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
@@ -9,9 +10,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/users","/h2-console/**").permitAll()
                 .antMatchers("/api/companies/**","/api/orders-service/**").permitAll()//authenticated()
@@ -21,8 +25,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         "/configuration/security",
                         "/swagger-ui.html",
                         "/webjars/**").permitAll()
-
-                .anyRequest().denyAll()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .httpBasic()
                 .and()
                 .headers().frameOptions().disable()
                 //.and()
@@ -30,5 +36,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         ;
 
     }
+
+
 
 }

@@ -16,7 +16,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
+//import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -48,7 +48,7 @@ public class UserControllerTest {
     @Test
     @ApiOperation("Create a new user")
     @DisplayName("should return a user")
-    @WithMockUser(username = "mauricio")
+   // @WithMockUser(username = "mauricio")
     public void createUserTest() throws Exception {
       User user= createNewUser();
       UserDto dto= createNewUserDto();
