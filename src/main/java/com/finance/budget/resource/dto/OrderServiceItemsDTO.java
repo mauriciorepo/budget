@@ -26,4 +26,6 @@ public class OrderServiceItemsDTO {
     private int numItem;
 
     private Long ORDERSERVICE_ID;
+
+
 }

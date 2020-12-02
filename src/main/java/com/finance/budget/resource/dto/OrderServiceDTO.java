@@ -42,4 +42,6 @@ public class OrderServiceDTO {
     private String annotation;
 
     private  String registrationDate;
+
+    private boolean aval;
 }
