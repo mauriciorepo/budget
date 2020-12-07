@@ -100,16 +100,11 @@ public class OrderServiceController {
 
        List<OrderService> listResult= orderServiceService.findByIdCompany(id);
 
-        modelMapper.
-                typeMap(OrderServiceItems.class, OrderServiceItemsDTO.class)
-                .addMappings(mapper -> {
-                    mapper.map(src -> src.getOrderService().getId(),
-                    OrderServiceItemsDTO::setORDERSERVICE_ID);
-        });
+
 
         List<OrderServiceDTO> list=listResult
                 .stream()
-                .map(entity->modelMapper.map(entity, OrderServiceDTO.class))
+                .map(  entity-> OrderServiceToDTO(entity) )
                 .collect(Collectors.toList());
 
        return list;
