@@ -48,30 +48,22 @@ public class OrderServiceController {
     private final ModelMapper modelMapper;
 
 
-
-
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public OrderService create(@RequestBody @Valid OrderServiceDTO dto){
-
-
-
         return companyService.getById(dto.getId_company()).map(company -> {
 
              OrderService order=modelMapper.map(dto,OrderService.class);
 
              order.setCompany(company);
-             //OrderService orderService=new
-             order.getList().forEach(entity-> entity.setOrderService(order));
 
+             order.getList().forEach(entity-> entity.setOrderService(order));
 
              return orderServiceService.create(order);
 
         }).orElseThrow( ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company not exist"));
 
     }
-
 
 
     @GetMapping
@@ -83,7 +75,6 @@ public class OrderServiceController {
         modelMapper.typeMap(OrderServiceItems.class, OrderServiceItemsDTO.class).addMappings(mapper -> {
             mapper.map(src -> src.getOrderService().getId(),
                     OrderServiceItemsDTO::setORDERSERVICE_ID);
-
         });
         List list=resultList.getContent()
                 .stream()
@@ -99,8 +90,6 @@ public class OrderServiceController {
     public List<OrderServiceDTO> findOrderService(@PathVariable Long id){
 
        List<OrderService> listResult= orderServiceService.findByIdCompany(id);
-
-
 
         List<OrderServiceDTO> list=listResult
                 .stream()
@@ -121,7 +110,7 @@ public class OrderServiceController {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "different id value");
         }
         OrderService order=orderServiceService.getById(id).map(orderService-> {
-            //BeanUtils.copyProperties(orderService,orderServiceDTO);
+
             orderService.setAnnotation(orderServiceDTO.getAnnotation());
             orderService.setStatus(orderServiceDTO.getStatus());
             orderService.setTitle(orderServiceDTO.getTitle());

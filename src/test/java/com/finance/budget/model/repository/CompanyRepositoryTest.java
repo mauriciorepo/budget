@@ -54,7 +54,7 @@ public class CompanyRepositoryTest {
     @Test
     @DisplayName("should return null when try to find a company")
     public void shouldReturnNullCompany(){
-        Long id=1L;
+        Long id=0L;
 
         boolean notFoundedCompany=repository.existsById(id);
 

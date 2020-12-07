@@ -1,6 +1,7 @@
 package com.finance.budget.resource.dto;
 
 
+import javax.persistence.OrderBy;
 import javax.validation.constraints.NotEmpty;
 
 
@@ -32,7 +33,7 @@ public class OrderServiceDTO {
     private String orderNumber;
 
     private String description;
-
+    @OrderBy("numItem ASC")
      private List<OrderServiceItemsDTO> list= new ArrayList();
 
     @NotEmpty
