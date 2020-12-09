@@ -31,7 +31,7 @@ public class OrderServiceItems {
     private Long quantity;
 
     private String scopeTitle;
-     @Column()
+
     private int numItem;
     @ManyToOne
     @JoinColumn(name="ORDERSERVICE_ID" )

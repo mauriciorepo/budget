@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -307,6 +308,14 @@ public class OrderServiceControllerTest {
 
         mvc.perform(request).andExpect(MockMvcResultMatchers.status().isOk());
 
+    }
+
+    @Test
+    @DisplayName("should return a list of order Services ")
+    public void returnListOfOrderService(){
+        List<OrderService> list= Arrays.asList(newOrderServiceInstance());
+
+        //BDDMockito.given(service.listOrderService()).willReturn(list)
     }
 
 

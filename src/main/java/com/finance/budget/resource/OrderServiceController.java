@@ -85,7 +85,7 @@ public class OrderServiceController {
 
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{id}/company")
     @ResponseStatus(HttpStatus.OK)
     public List<OrderServiceDTO> findOrderService(@PathVariable Long id){
 
@@ -98,6 +98,8 @@ public class OrderServiceController {
 
        return list;
     }
+
+
 
 
 

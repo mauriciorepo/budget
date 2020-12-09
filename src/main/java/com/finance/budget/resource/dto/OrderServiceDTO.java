@@ -33,7 +33,7 @@ public class OrderServiceDTO {
     private String orderNumber;
 
     private String description;
-    @OrderBy("numItem ASC")
+
      private List<OrderServiceItemsDTO> list= new ArrayList();
 
     @NotEmpty
