@@ -155,7 +155,7 @@ public class OrderServiceControllerTest {
         OrderService order=newOrderServiceInstance();
         BDDMockito.given(service.findByIdCompany(Mockito.anyLong())).willReturn(Arrays.asList(order));
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get(ORDER_SERVICE_API.concat("/" + id))
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get(ORDER_SERVICE_API.concat("/"+id+"/company"))
                 .accept(MediaType.APPLICATION_JSON);
 
         mvc.perform(request).andExpect(status().isOk());
