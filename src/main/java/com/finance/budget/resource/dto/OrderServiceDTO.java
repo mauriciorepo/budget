@@ -5,6 +5,7 @@ import javax.persistence.OrderBy;
 import javax.validation.constraints.NotEmpty;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class OrderServiceDTO {
     @NotEmpty
     private String title;
 
+    private LocalDate modified;
 
     private String annotation;
 
