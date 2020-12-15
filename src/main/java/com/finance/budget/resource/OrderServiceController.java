@@ -35,6 +35,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -99,10 +100,15 @@ public class OrderServiceController {
        return list;
     }
 
+    @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public OrderServiceDTO getOrderById(@PathVariable Long id){
+        return orderServiceService
+                .getById(id)
+                .map(order-> OrderServiceToDTO(order))
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-
-
-
+    }
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
