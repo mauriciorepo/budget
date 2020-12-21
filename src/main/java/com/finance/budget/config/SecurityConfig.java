@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 
                 .antMatchers("/api/users","/h2-console/**").permitAll()
-                .antMatchers("/api/companies/**","/api/orders-service/**").permitAll()//authenticated()
+                .antMatchers("/api/companies/**","/api/orders-service/**").authenticated()
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
                         "/swagger-resources/**",
