@@ -65,6 +65,8 @@ public class OrderService {
     @NotNull
     private LocalDate registrationDate;
 
+    private boolean indorsement;
+
 
 
     private LocalDate modified;
