@@ -20,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 //import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -62,7 +63,7 @@ public class CompanyControllerTest {
 
 
 
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should create a company")
     public void createCompanyTest() throws Exception {
@@ -91,7 +92,7 @@ public class CompanyControllerTest {
 
 
 
-
+    @WithMockUser("spring")
     @Test
     //@WithMockUser(username="mauricio")
 
@@ -114,7 +115,7 @@ public class CompanyControllerTest {
         ;
 
     }
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return company")
    // @WithMockUser(username="mauricio")
@@ -137,7 +138,7 @@ public class CompanyControllerTest {
         ;
 
     }
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("must return not found when the book is not founded")
     public void companyNotFoundTest() throws Exception {
@@ -157,7 +158,7 @@ public class CompanyControllerTest {
                 .andExpect(status().isNotFound());
 
     }
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should receive a no content when try to  delete a company")
     public void deleteCompanyTest() throws Exception {
@@ -176,7 +177,7 @@ public class CompanyControllerTest {
 
 
     }
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should throw an exception when try to delete a company that doesn´t exists")
     public void deleteNotExistCompany() throws Exception {
@@ -190,7 +191,7 @@ public class CompanyControllerTest {
                 .andExpect(status().isNotFound());
     }
 
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return a updated company")
     public void updateCompanyTest() throws Exception {
@@ -225,7 +226,7 @@ public class CompanyControllerTest {
 
     }
 
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return a not founded status when try to update a company")
     public void updateNotFoundedCompanyTest() throws Exception {
@@ -249,7 +250,7 @@ public class CompanyControllerTest {
                 .andExpect(status().isNotFound());
 
     }
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return a conflict exception when try to update company with different id")
     public void updateCompanyWithConflictIdTest() throws Exception {
@@ -272,7 +273,7 @@ public class CompanyControllerTest {
                 .perform(request)
                 .andExpect(status().isConflict());
     }
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return list of Companies")
     public void listCompanyTest() throws Exception {

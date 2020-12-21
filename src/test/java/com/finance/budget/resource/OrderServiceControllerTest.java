@@ -38,6 +38,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -71,10 +72,11 @@ public class OrderServiceControllerTest {
     private OrderService orderServiceMock;
 
 
-
+    @WithMockUser("spring")
     @Test
     @ApiOperation("Create Order Service")
     @DisplayName("should create a order service")
+
     public void create() throws Exception {
         Company company=newInstanceCompany();
         OrderServiceDTO orderServiceDTO=newOrderServiceDTOInstance();
@@ -103,7 +105,7 @@ public class OrderServiceControllerTest {
                 .andExpect(jsonPath("status").value("Em concorrencia"))
         ;
     }
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return a company not exist")
     public void createInvalidOrderServiceTest() throws Exception {
@@ -125,7 +127,7 @@ public class OrderServiceControllerTest {
         ;
 
     }
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return a bad request order service")
     public void createNullOrderService() throws Exception {
@@ -147,7 +149,7 @@ public class OrderServiceControllerTest {
         ;
 
     }
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return a list of OrderService by id company")
     public void shouldReturnAListOfOrderService() throws Exception {
@@ -161,6 +163,7 @@ public class OrderServiceControllerTest {
         mvc.perform(request).andExpect(status().isOk());
 
     }
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return order service by id company")
     public void findOrderServiceByIdCompanyTest() throws Exception {
@@ -189,7 +192,7 @@ public class OrderServiceControllerTest {
 
 
     }
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return status created when OrderService is updated")
     public void updateOrderService() throws Exception {
@@ -223,6 +226,7 @@ public class OrderServiceControllerTest {
                 .andExpect(jsonPath("status").value("Em concorrencia"))
         ;
     }
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return status conflict when try to update OrderService")
     public void updateOrderServiceWithConflictTest() throws Exception {
@@ -247,7 +251,7 @@ public class OrderServiceControllerTest {
                 .andExpect(status().isConflict())
           ;
     }
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return status created when OrderService is updated")
     public void updateNotFoundedOrderServiceTest() throws Exception {
@@ -294,7 +298,7 @@ public class OrderServiceControllerTest {
         ;
 
     }
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return a Order Service when try to getOrderServiceById")
     public void returnOrderServiceWhenGetOrderServiceById() throws Exception {
@@ -309,7 +313,7 @@ public class OrderServiceControllerTest {
         mvc.perform(request).andExpect(MockMvcResultMatchers.status().isOk());
 
     }
-
+    @WithMockUser("spring")
     @Test
     @DisplayName("should return a list of order Services ")
     public void returnListOfOrderService(){
