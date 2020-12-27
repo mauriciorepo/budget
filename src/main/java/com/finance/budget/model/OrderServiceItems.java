@@ -30,7 +30,7 @@ public class OrderServiceItems {
 
     private Long quantity;
 
-    private String scopeTitle;
+    private boolean scopeTitle;
 
     private int numItem;
     @ManyToOne

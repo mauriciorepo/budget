@@ -47,4 +47,5 @@ public class OrderServiceDTO {
     private  String registrationDate;
 
     private boolean indorsement;
+
 }

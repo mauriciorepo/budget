@@ -377,7 +377,7 @@ public class OrderServiceControllerTest {
         return OrderServiceItemsDTO.builder()
                 .description("do something")
                 .quantity(1L)
-                .scopeTitle("1")
+                .scopeTitle(true)
                 .value(34.67)
                 .numItem(1)
                 .build();
@@ -387,7 +387,7 @@ public class OrderServiceControllerTest {
         return OrderServiceItems.builder()
                 .description("do something")
                 .quantity(1L)
-                .scopeTitle("1")
+                .scopeTitle(true)
                 .numItem(1)
                 .value(25.46)
                 .build();

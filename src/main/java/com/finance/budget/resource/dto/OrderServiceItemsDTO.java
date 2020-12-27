@@ -19,7 +19,7 @@ public class OrderServiceItemsDTO {
 
     private Long quantity;
 
-    private String scopeTitle;
+    private boolean scopeTitle;
 
     private double value;
 

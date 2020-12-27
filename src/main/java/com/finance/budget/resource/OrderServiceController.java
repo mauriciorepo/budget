@@ -123,7 +123,7 @@ public class OrderServiceController {
             orderService.setStatus(orderServiceDTO.getStatus());
             orderService.setTitle(orderServiceDTO.getTitle());
             orderService.setDescription(orderServiceDTO.getDescription());
-            //orderService.setIndorsement(orderServiceDTO.get);
+            orderService.setIndorsement(orderServiceDTO.isIndorsement());
             return orderService;
         }).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Order not exist" ));
 
