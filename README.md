@@ -16,17 +16,10 @@
   🚧  Budget backend project ...  builit in 🚧
 </h4>
 
-### About
+###Tabela de conteúdos
 
-This is an application where you can make simple budgets and relate them with companines.</br>
-With our application, you can easily organize budgets and produce reports.
-
-
-Tabela de conteúdos
-=================
 <!--ts-->
 *   [About](#About)
-*   [Tabela de Conteudo](#tabela-de-conteudo)
 *   [Features](#Features)
 *   [Demo application](#Demo-application)
 *   [Getting started](#Getting-started)
@@ -36,22 +29,25 @@ Tabela de conteúdos
 *   [Tecnologias](#tecnologias)
 <!--te-->
 
+### About
+
+    This is an application where you can make simple budgets and relate them with companines.
+    With our application, you can easily organize budgets and produce reports.
 
 ### Features
-
-- [x]   Persist User
-- [X]   Authentication User
-- [X]   Authorization User
-- [ ]   Delete User
-- [x]   Persist Company
-- [x]   Find company by id
-- [X]   Find all companies
-- [X]   Update company
-- [ ]   Delete company
-- [x]   Persist Order Service
-- [x]   Find Order Service by id
-- [x]   Find Order Service by id company
-- [X]   Update Order Service
+*[x]   Persist User
+*[X]   Authentication User
+*[X]   Authorization User
+*[ ]   Delete User
+*[x]   Persist Company
+*[x]   Find company by id
+*[X]   Find all companies
+*[X]   Update company
+*[ ]   Delete company
+*[x]   Persist Order Service
+*[x]   Find Order Service by id
+*[x]   Find Order Service by id company
+*[X]   Update Order Service
 
 ### Demo application
 
@@ -66,7 +62,6 @@ To get for development, we need to clone the project repo using some terminal li
 
 - `cd budget`
 
-
 #### Requirements
 - [JDK 8: Required to run a java project](https://www.oracle.com/br/java/technologies/javase/javase-jdk8-downloads.html)
 
@@ -76,7 +71,6 @@ After that, you can import project to Eclipse, Intellij or Vscode
 - [Eclipse: for development the project](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen3a)
 - [Intellij for development the project](https://www.jetbrains.com/)
 - [Vscode for development the project](https://code.visualstudio.com/)
-
 
 ### Tecnologies
 
@@ -92,7 +86,6 @@ The following tools were used on construction project:
 - [Swagger](https://swagger.io/)
 - [Jacoco](https://www.jacoco.org/jacoco/trunk/index.html)
   
-
 **Find company by id**
 ----
 Returns json data about a single company.
