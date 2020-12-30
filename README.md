@@ -25,34 +25,33 @@ With our application, you can easily organize budgets and produce reports.
 Tabela de conteúdos
 =================
 <!--ts-->
-* [About](#About)
-* [Tabela de Conteudo](#tabela-de-conteudo)
-* [Features](#Features)
-* [Demo application](#Demo-application)
-* [Getting started](#Getting-started)
-    * [Start](#Start)
-    * [Requirements](#Requirements)     
-* [Tests](#testes)
-* [Tecnologias](#tecnologias)
+*   [About](#About)
+*   [Tabela de Conteudo](#tabela-de-conteudo)
+*   [Features](#Features)
+*   [Demo application](#Demo-application)
+*   [Getting started](#Getting-started)
+    *   [Start](#Start)
+    *   [Requirements](#Requirements)     
+*   [Tests](#testes)
+*   [Tecnologias](#tecnologias)
 <!--te-->
 
 
 ### Features
 
-- [x] Persist User
-- [X] Authentication User
-- [X] Authorization User
-- [ ] Delete User
-
-- [x] Persist Company
-- [x] Find company by id
-- [X] Find all companies
-- [X] Update company
-- [ ] Delete company
-- [x] Persist Order Service
-- [x] Find Order Service by id
-- [x] Find Order Service by id company
-- [X] Update Order Service
+- [x]   Persist User
+- [X]   Authentication User
+- [X]   Authorization User
+- [ ]   Delete User
+- [x]   Persist Company
+- [x]   Find company by id
+- [X]   Find all companies
+- [X]   Update company
+- [ ]   Delete company
+- [x]   Persist Order Service
+- [x]   Find Order Service by id
+- [x]   Find Order Service by id company
+- [X]   Update Order Service
 
 ### Demo application
 
@@ -60,7 +59,7 @@ show some gif
 
 ### Getting started
 
-#### Start
+ #### Start
 To get for development, we need to clone the project repo using some terminal like git bash and then use the following code:
 - `cd path of your preference`
 - `git clone https://github.com/mauriciorepo/budget`
@@ -69,12 +68,12 @@ To get for development, we need to clone the project repo using some terminal li
 
 
 #### Requirements
-- [JDK 8: Necessário para executar o projeto Java](https://www.oracle.com/br/java/technologies/javase/javase-jdk8-downloads.html)
+- [JDK 8: Required to run a java project](https://www.oracle.com/br/java/technologies/javase/javase-jdk8-downloads.html)
 
-- [Maven 3.5.3: Necessário para realizar o build do projeto Java](http://mirror.nbtelecom.com.br/apache/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.zip)
+- [Maven 3.5.3: Required to do a build Java project](http://mirror.nbtelecom.com.br/apache/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.zip)
 
 After that, you can import project to Eclipse, Intellij or Vscode
-- [Eclipse: Para desenvolvimento do projeto](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen3a)
+- [Eclipse: for development the project](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen3a)
 - [Intellij for development the project](https://www.jetbrains.com/)
 - [Vscode for development the project](https://code.visualstudio.com/)
 

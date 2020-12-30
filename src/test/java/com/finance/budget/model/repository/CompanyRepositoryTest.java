@@ -22,10 +22,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CompanyRepositoryTest {
 
     @Autowired
-    CompanyRepository repository;
+    private CompanyRepository repository;
 
     @Autowired
-    TestEntityManager entityManager;
+    private TestEntityManager entityManager;
 
 
     @Test

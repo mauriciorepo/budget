@@ -107,7 +107,7 @@ public class CompanyServiceTest {
 
         Mockito.when(repository.findById(id)).thenReturn(Optional.of(company));
 
-        org.junit.jupiter.api.Assertions.assertDoesNotThrow(()-> service.delete(company));
+        Assertions.assertDoesNotThrow(()-> service.delete(company));
 
         Mockito.verify(repository,Mockito.times(1)).delete(company);
 
@@ -121,7 +121,7 @@ public class CompanyServiceTest {
 
         Mockito.when(repository.findById(id)).thenReturn(Optional.empty());
 
-        org.junit.jupiter.api.Assertions.assertThrows( IllegalArgumentException.class, ()->service.delete(company));
+        Assertions.assertThrows( IllegalArgumentException.class, ()->service.delete(company));
 
         Mockito.verify(repository, Mockito.never()).delete(company);
     }

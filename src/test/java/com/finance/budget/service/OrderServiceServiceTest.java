@@ -40,7 +40,7 @@ public class OrderServiceServiceTest {
     private OrderServiceService orderServiceService;
 
     @MockBean
-    OrderServiceRepository orderServiceRepository;
+    private OrderServiceRepository orderServiceRepository;
 
     @BeforeEach
     void setUp(){
@@ -127,7 +127,7 @@ public class OrderServiceServiceTest {
     @Test
     @DisplayName("should return pageable of oreder service")
     public void returnPageOrderServiceTest(){
-        Long id=1L;
+
         OrderService order=newOrderServiceInstance();
         Company company=newInstanceCompany();
 

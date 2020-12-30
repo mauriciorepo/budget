@@ -35,7 +35,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 import java.util.List;
-import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 @RestController
@@ -130,7 +130,7 @@ public class OrderServiceController {
         List<OrderServiceItems> listItems=orderServiceDTO
                 .getList()
                 .stream()
-                .map(orderServiceItemsDTO-> DTOToOrderServiceItems(orderServiceItemsDTO))
+                .map(orderServiceItemsDTO-> dtoToOrderServiceItems(orderServiceItemsDTO))
                 .collect(Collectors.toList());
         order.updateItems(listItems);
 
@@ -155,7 +155,7 @@ public class OrderServiceController {
         return modelMapper.map(entity, OrderServiceDTO.class );
     }
 
-    private OrderServiceItems DTOToOrderServiceItems(OrderServiceItemsDTO dto){
+    private OrderServiceItems dtoToOrderServiceItems(OrderServiceItemsDTO dto){
         modelMapper.typeMap(OrderServiceItemsDTO.class,OrderServiceItems.class ).addMappings(mapper ->{
             mapper.map(src -> src.getORDERSERVICE_ID(),(dest, v) -> dest.getOrderService().setId((Long) v) );
 

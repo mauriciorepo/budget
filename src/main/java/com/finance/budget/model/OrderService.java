@@ -72,7 +72,7 @@ public class OrderService {
     private LocalDate modified;
 
     @PostPersist
-    void noReturn(){
+    private void noReturn(){
 
         String number=this.company.getId()+"";
 
@@ -86,21 +86,19 @@ public class OrderService {
 
 
     @PrePersist
-    void   onCreate(){
+    private void  onCreate(){
         this.setModified(LocalDate.now());
         this.setRegistrationDate(LocalDate.now());
     }
 
     @PreUpdate
-    void onUpdate(){
+    private void onUpdate(){
         this.setModified(LocalDate.now());
     }
 
 
     public void updateItems(List<OrderServiceItems> items){
-        if(this.list == null){
-
-        }else{
+        if(this.list != null){
             this.list.retainAll(items);
             this.list.addAll(items);
         }

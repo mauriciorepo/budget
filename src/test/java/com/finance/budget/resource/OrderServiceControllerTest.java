@@ -57,7 +57,7 @@ public class OrderServiceControllerTest {
     public static final String ORDER_SERVICE_API="/api/orders-service";
 
     @Autowired
-    MockMvc mvc;
+    private MockMvc mvc;
 
     @MockBean
     private UserServiceImpl userService;
@@ -68,8 +68,6 @@ public class OrderServiceControllerTest {
     @MockBean
     private OrderServiceService service;
 
-    @MockBean
-    private OrderService orderServiceMock;
 
 
     @WithMockUser("spring")
@@ -310,14 +308,14 @@ public class OrderServiceControllerTest {
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get(ORDER_SERVICE_API.concat("/" + id))
                 .accept(MediaType.APPLICATION_JSON);
 
-        mvc.perform(request).andExpect(MockMvcResultMatchers.status().isOk());
+        mvc.perform(request).andExpect(status().isOk());
 
     }
     @WithMockUser("spring")
     @Test
     @DisplayName("should return a list of order Services ")
     public void returnListOfOrderService(){
-        List<OrderService> list= Arrays.asList(newOrderServiceInstance());
+        //List<OrderService> list= Arrays.asList(newOrderServiceInstance());
 
         //BDDMockito.given(service.listOrderService()).willReturn(list)
     }
@@ -372,7 +370,7 @@ public class OrderServiceControllerTest {
     }
 
 
-    static OrderServiceItemsDTO createNewOrderServiceItemsDTO(){
+    public static OrderServiceItemsDTO createNewOrderServiceItemsDTO(){
 
         return OrderServiceItemsDTO.builder()
                 .description("do something")

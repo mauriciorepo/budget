@@ -1,7 +1,7 @@
 package com.finance.budget.resource.dto;
 
 
-import javax.persistence.OrderBy;
+
 import javax.validation.constraints.NotEmpty;
 
 
@@ -28,7 +28,7 @@ public class OrderServiceDTO {
     @NotEmpty
     private String status;
 
-    //@NotNull
+
     private Long id_company;
 
     private String orderNumber;
