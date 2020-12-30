@@ -16,7 +16,7 @@
   🚧  Budget backend project ...  builit in 🚧
 </h4>
 
-###About
+### About
 
 This is an application where you can make simple budgets and relate them with companines.</br>
 With our application, you can easily organize budgets and produce reports.
@@ -28,12 +28,10 @@ Tabela de conteúdos
 * [About](#About)
 * [Tabela de Conteudo](#tabela-de-conteudo)
 * [Features](#Features)
-* [Demo application](#Demo application)
-* [How to use](#How-to-)
-    * [Pre Requisitos](#pre-requisitos)
-    * [Local files](#local-files)
-    * [Remote files](#remote-files)
-   
+* [Demo application](#Demo-application)
+* [Getting started](#Getting-started)
+    * [Start](#Start)
+    * [Requirements](#Requirements)     
 * [Tests](#testes)
 * [Tecnologias](#tecnologias)
 <!--te-->
@@ -56,13 +54,13 @@ Tabela de conteúdos
 - [x] Find Order Service by id company
 - [X] Update Order Service
 
-###Demo application
+### Demo application
 
 show some gif
 
-###Getting started
+### Getting started
 
-####Start
+#### Start
 To get for development, we need to clone the project repo using some terminal like git bash and then use the following code:
 - `cd path of your preference`
 - `git clone https://github.com/mauriciorepo/budget`
@@ -70,7 +68,7 @@ To get for development, we need to clone the project repo using some terminal li
 - `cd budget`
 
 
-####Requirements
+#### Requirements
 - [JDK 8: Necessário para executar o projeto Java](https://www.oracle.com/br/java/technologies/javase/javase-jdk8-downloads.html)
 
 - [Maven 3.5.3: Necessário para realizar o build do projeto Java](http://mirror.nbtelecom.com.br/apache/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.zip)
@@ -81,7 +79,7 @@ After that, you can import project to Eclipse, Intellij or Vscode
 - [Vscode for development the project](https://code.visualstudio.com/)
 
 
-###Tecnologies
+### Tecnologies
 
 The following tools were used on construction project:
 
