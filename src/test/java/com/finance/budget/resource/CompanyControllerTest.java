@@ -5,7 +5,7 @@ import com.finance.budget.model.Company;
 import com.finance.budget.resource.dto.CompanyDTO;
 import com.finance.budget.service.CompanyService;
 import com.finance.budget.service.implementation.UserServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -34,19 +34,19 @@
     With our application, you can easily organize budgets and produce reports.
 
 ### Features
-* [x]   Persist User
-* [X]   Authentication User
-* [X]   Authorization User
-* [ ]   Delete User
-* [x]   Persist Company
-* [x]   Find company by id
-* [X]   Find all companies
-* [X]   Update company
-* [ ]   Delete company
-* [x]   Persist Order Service
-* [x]   Find Order Service by id
-* [x]   Find Order Service by id company
-* [X]   Update Order Service
+*  [x]   Persist User
+*  [X]   Authentication User
+*  [X]   Authorization User
+*  [ ]   Delete User
+*  [x]   Persist Company
+*  [x]   Find company by id
+*  [X]   Find all companies
+*  [X]   Update company
+*  [ ]   Delete company
+*  [x]   Persist Order Service
+*  [x]   Find Order Service by id
+*  [x]   Find Order Service by id company
+*  [X]   Update Order Service
 
 ### Demo application
 
@@ -56,34 +56,34 @@ show some gif
 
  #### Start
 To get for development, we need to clone the project repo using some terminal like git bash and then use the following code:
-- `cd path of your preference`
-- `git clone https://github.com/mauriciorepo/budget`
+-  `cd path of your preference`
+-  `git clone https://github.com/mauriciorepo/budget`
 
-- `cd budget`
+-  `cd budget`
 
 #### Requirements
-* [JDK 8: Required to run a java project](https://www.oracle.com/br/java/technologies/javase/javase-jdk8-downloads.html)
+*  [JDK 8: Required to run a java project](https://www.oracle.com/br/java/technologies/javase/javase-jdk8-downloads.html)
 
-* [Maven 3.5.3: Required to do a build Java project](http://mirror.nbtelecom.com.br/apache/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.zip)
+*  [Maven 3.5.3: Required to do a build Java project](http://mirror.nbtelecom.com.br/apache/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.zip)
 
 After that, you can import project to Eclipse, Intellij or Vscode
-* [Eclipse: for development the project](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen3a)
-* [Intellij for development the project](https://www.jetbrains.com/)
-* [Vscode for development the project](https://code.visualstudio.com/)
+*  [Eclipse: for development the project](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen3a)
+*  [Intellij for development the project](https://www.jetbrains.com/)
+*  [Vscode for development the project](https://code.visualstudio.com/)
 
 ### Tecnologies
 
 The following tools were used on construction project:
 
-* [Java 8](https://www.java.com/pt-BR/download/manual.jsp)
-* [Spring](https://spring.io/)
-* [Spring Boot](https://spring.io/projects/spring-boot)
-* [Lombok](https://projectlombok.org/)
-* [JUnit 5](https://junit.org/junit5/)
-* [Oauth2.0](https://oauth.net/2/)
-* [JWT](https://jwt.io/)
-* [Swagger](https://swagger.io/)
-* [Jacoco](https://www.jacoco.org/jacoco/trunk/index.html)
+*  [Java 8](https://www.java.com/pt-BR/download/manual.jsp)
+*  [Spring](https://spring.io/)
+*  [Spring Boot](https://spring.io/projects/spring-boot)
+*  [Lombok](https://projectlombok.org/)
+*  [JUnit 5](https://junit.org/junit5/)
+*  [Oauth2.0](https://oauth.net/2/)
+*  [JWT](https://jwt.io/)
+*  [Swagger](https://swagger.io/)
+*  [Jacoco](https://www.jacoco.org/jacoco/trunk/index.html)
   
 **Find company by id**
 ----

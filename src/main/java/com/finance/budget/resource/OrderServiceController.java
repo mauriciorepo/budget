@@ -94,7 +94,7 @@ public class OrderServiceController {
 
         List<OrderServiceDTO> list=listResult
                 .stream()
-                .map(  entity-> OrderServiceToDTO(entity) )
+                .map(  entity-> orderServiceToDTO(entity) )
                 .collect(Collectors.toList());
 
        return list;
@@ -105,7 +105,7 @@ public class OrderServiceController {
     public OrderServiceDTO getOrderById(@PathVariable Long id){
         return orderServiceService
                 .getById(id)
-                .map(order-> OrderServiceToDTO(order))
+                .map(order-> orderServiceToDTO(order))
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
     }
@@ -136,12 +136,12 @@ public class OrderServiceController {
 
         OrderService updateOrderService= orderServiceService.update(order);
 
-        return OrderServiceToDTO(updateOrderService);
+        return orderServiceToDTO(updateOrderService);
 
     }
 
 
-    private OrderServiceDTO OrderServiceToDTO(OrderService entity){
+    private OrderServiceDTO orderServiceToDTO(OrderService entity){
         modelMapper.typeMap(OrderServiceItems.class,OrderServiceItemsDTO.class ).addMappings(mapper ->{
             mapper.map(src -> src.getOrderService().getId(),(dest, v) -> dest.setORDERSERVICE_ID((Long) v) );
 
