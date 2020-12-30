@@ -35,19 +35,19 @@
     With our application, you can easily organize budgets and produce reports.
 
 ### Features
-*[x]   Persist User
-*[X]   Authentication User
-*[X]   Authorization User
-*[ ]   Delete User
-*[x]   Persist Company
-*[x]   Find company by id
-*[X]   Find all companies
-*[X]   Update company
-*[ ]   Delete company
-*[x]   Persist Order Service
-*[x]   Find Order Service by id
-*[x]   Find Order Service by id company
-*[X]   Update Order Service
+* [x]   Persist User
+* [X]   Authentication User
+* [X]   Authorization User
+* [ ]   Delete User
+* [x]   Persist Company
+* [x]   Find company by id
+* [X]   Find all companies
+* [X]   Update company
+* [ ]   Delete company
+* [x]   Persist Order Service
+* [x]   Find Order Service by id
+* [x]   Find Order Service by id company
+* [X]   Update Order Service
 
 ### Demo application
 
