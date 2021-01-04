@@ -16,8 +16,8 @@
   🚧  Budget backend project ...  builit in 🚧
 </h4>
 
-###Tabela de conteúdos
-
+Tabela de conteúdos
+==========
 <!--ts-->
 *   [About](#About)
 *   [Features](#Features)
@@ -188,4 +188,63 @@ Returns json data about a single company.
   "x-xss-protection": "1; mode=block"
 }
 ```
+#   Stories based  on BDD - Behavior Driven Development
+
+##  Company Story (persist company)
+> As **User or Admin**, i want to be able to persist some company, so that i may make budget **for** that company. 
+>
+>**Scenario 1**: Invalid Company
+> 
+> **Given** the user is on window company<br>
+> **when** fill with null<br>
+> **then**  should return Business exception when companies is null.
+> 
+> **Scenario 2**: Valid Company
+> 
+> **Given** the user or admin is on window company,<br> 
+> **when** fill with name<br>
+> **And** fill with email<br>
+> **And** fill with cellphone<br>
+> **And** fill with stateAbbrev<br>
+> **then** should return a persisted company.
+> 
+> Measurement of success:
+
+##  Company Story (Find company)
+> As **User or Admin**, i want to be able to find some company, so that i may make budget **for** that company.
+>
+>**Scenario 1**: Don´t find Company
+>
+> **Given** the user is on window find company <br>
+> **when** fill with company id<br>
+> **then**  should return Business exception when respective company.
+>
+> **Scenario 2**: Not Founded Company
+>
+> **Given** the user or admin is on window company<br>
+> **when** fill with name<br>
+> **And** fill with email<br>
+> **And** fill with cellphone<br>
+> **And** fill with<br>
+> **And** fill with stateAbbrev<br>
+> **then** should return a persisted company.
+
+##  Company Story (update company)
+> As **User or Admin**, i want to be able to update some company, so that i may make budget **for** that company.
+>
+>**Scenario 1**: Invalid Company
+>
+> **Given** the user is on window company<br>
+> **when** fill with id company with null<br>
+> **then**  should return not found when companies is null.
+>
+> **Scenario 2**: Valid updated Company
+>
+> **Given** the user or admin is on window company,<br>
+> **when** fill with name <br>
+> **Or** fill with email<br>
+> **Or** fill with cellphone <br>
+> **Or** fill with stateAbbrev<br>
+> **then** should return a updated company.
+> 
 

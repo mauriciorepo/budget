@@ -16,7 +16,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-//import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -37,8 +36,6 @@ public class UserControllerTest {
 
     @Autowired
     private MockMvc mvc;
-
-
 
     @MockBean
     private UserServiceImpl userService;
@@ -73,12 +70,6 @@ public class UserControllerTest {
 
 
     }
-
-    /*@Test
-    @DisplayName("should return a null user")
-    public void createInvalidUser(){
-
-    }*/
 
     private User createNewUser(){
         return User
