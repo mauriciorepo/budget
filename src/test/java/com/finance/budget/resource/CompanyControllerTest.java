@@ -74,7 +74,7 @@ public class CompanyControllerTest {
         MockHttpServletRequestBuilder request = post(COMPANY_API)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
-          //      .header("Authorization", "Bearer " + accessToken)
+          //    .header("Authorization", "Bearer " + accessToken)
                 .content(json);
 
 

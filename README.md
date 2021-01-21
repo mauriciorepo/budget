@@ -16,7 +16,7 @@
   🚧  Budget backend project ...  builit in 🚧
 </h4>
 
-Tabela de conteúdos
+Content Table
 ==========
 <!--ts-->
 *   [About](#About)
@@ -191,7 +191,7 @@ Returns json data about a single company.
 #   Stories based  on BDD - Behavior Driven Development
 
 ##  Company Story (persist company)
-> As **User or Admin**, i want to be able to persist some company, so that i may make budget **for** that company. 
+> As **User or Admin**, i want to be able to persist some company, so that i may make budget for that company. 
 >
 >**Scenario 1**: Invalid Company
 > 
@@ -211,7 +211,7 @@ Returns json data about a single company.
 > Measurement of success:
 
 ##  Company Story (Find company)
-> As **User or Admin**, i want to be able to find some company, so that i may make budget **for** that company.
+> As **User or Admin**, i want to be able to find some company, so that i may make budget for that company.
 >
 >**Scenario 1**: Don´t find Company
 >
@@ -230,7 +230,7 @@ Returns json data about a single company.
 > **then** should return a persisted company.
 
 ##  Company Story (update company)
-> As **User or Admin**, i want to be able to update some company, so that i may make budget **for** that company.
+> As **User or Admin**, i want to be able to update some company, so that i may make budget for that company.
 >
 >**Scenario 1**: Invalid Company
 >
