@@ -26,7 +26,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -141,12 +141,12 @@ public class CompanyControllerTest {
     @Test
     @DisplayName("should find company by name")
     public void findCompanyByNameTest() throws Exception {
-        String name="Mar";
+        String name="Mau";
         Company company=createCompany();
 
         BDDMockito.given(service.findCompanyByName(Mockito.any())).willReturn(Arrays.asList(company));
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get(COMPANY_API.concat("/name/" + name))
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get(COMPANY_API.concat("/name?" + name))
                 .accept(MediaType.APPLICATION_JSON);
         mvc.perform(request)
                 .andExpect(status().isOk())

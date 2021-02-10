@@ -69,6 +69,12 @@ public class CompanyServiceTest {
 
 
     @Test
+    @DisplayName("should return a list of company by name")
+    public void returnListCompanyByName(){
+        String name="";
+    }
+
+    @Test
     @DisplayName("should return a company")
     public void findCompanyTest(){
         Company company=newInstanceCompany();

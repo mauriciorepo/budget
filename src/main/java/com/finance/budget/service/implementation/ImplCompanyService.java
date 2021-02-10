@@ -72,5 +72,11 @@ public class ImplCompanyService implements CompanyService {
         return repository.findAll();
     }
 
+    @Override
+    public List<Company> findCompanyByName(String name) {
+
+        return repository.findByNameContainingIgnoreCase(name);
+    }
+
 
 }

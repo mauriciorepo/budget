@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.List;
 
 public interface CompanyService {
+
     Company create(Company company);
 
     Optional<Company> getById(Long id);
@@ -19,4 +20,6 @@ public interface CompanyService {
     Page<Company> listCompany(Company company, Pageable page);
 
     List<Company> findCompanyList();
+
+    List<Company> findCompanyByName(String name);
 }

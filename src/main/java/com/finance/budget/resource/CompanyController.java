@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.util.stream.Collectors;
 import java.util.List;
 
@@ -64,7 +65,6 @@ public class CompanyController {
                 .getById(id)
                 .map(company ->modelMapper.map(company, CompanyDTO.class) )
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
 
     }
 
@@ -123,8 +123,18 @@ public class CompanyController {
     }
 
     @GetMapping("/all")
+    @ResponseStatus(HttpStatus.OK)
     public List<CompanyDTO> getAllCompany(){
         List list=companyService.findCompanyList();
        return (List<CompanyDTO>) list.stream().map(entity->modelMapper.map(entity, CompanyDTO.class)).collect(Collectors.toList());
+    }
+
+    @GetMapping("/name")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CompanyDTO> getCompanyByName(@PathParam("name") String name){
+
+        List<Company> list= companyService.findCompanyByName(name);
+
+        return list.stream().map(entity->modelMapper.map(entity,CompanyDTO.class)).collect(Collectors.toList());
     }
 }
