@@ -129,7 +129,7 @@ public class CompanyController {
        return (List<CompanyDTO>) list.stream().map(entity->modelMapper.map(entity, CompanyDTO.class)).collect(Collectors.toList());
     }
 
-    @GetMapping("/name")
+    @GetMapping("/name{name}")
     @ResponseStatus(HttpStatus.OK)
     public List<CompanyDTO> getCompanyByName(@PathParam("name") String name){
 
