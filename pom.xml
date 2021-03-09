@@ -153,8 +153,8 @@
 				<configuration>
 					<baselineOnMigrate>true</baselineOnMigrate>
 					<url>jdbc:postgresql://localhost:5432/db?useTimezone=true&amp;serverTimezone=UTC&amp;useSSL=false</url>
-					<user>sa</user>
-					<password>password</password>
+					<user>postgres</user>
+					<password>postgres</password>
 				</configuration>
 				<dependencies>
 					<dependency>
