@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 @AllArgsConstructor
 @Builder
@@ -14,12 +16,19 @@ public class UserDto {
 
     private Long id;
 
-    private String login;
+    @NotNull
+    private String username;
 
+    private boolean account_non_expired;
+
+    private boolean account_non_locked;
+
+    private boolean credentials_non_expired;
+    @NotNull
     private String password;
 
     private String email;
 
-    private String role;
+    private boolean enabled;
 
 }

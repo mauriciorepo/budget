@@ -1,9 +1,10 @@
 package com.finance.budget.service;
 
-import com.finance.budget.model.User;
+
+import com.finance.budget.model.Users;
 
 public interface UserService {
-    User create(User user);
+    Users create(Users user);
 
 
 }

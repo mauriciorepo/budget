@@ -1,7 +1,8 @@
 package com.finance.budget.service.implementation;
 
 
-import com.finance.budget.model.User;
+
+import com.finance.budget.model.Users;
 import com.finance.budget.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +22,7 @@ public class UserServiceImpl implements  UserDetailsService  {
     }
 
 
-    public User create(User user) {
+    public Users create(Users user) {
 
         return repository.save(user);
     }
@@ -29,15 +30,15 @@ public class UserServiceImpl implements  UserDetailsService  {
 
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String user_name) throws UsernameNotFoundException {
 
-        User user=repository
-                .findByLogin(login)
+        Users user=repository
+                .findByUsername(user_name)
                 .orElseThrow( ()-> new UsernameNotFoundException("Login not founded"));
 
         return  org.springframework.security.core.userdetails.User
                  .builder()
-                 .username(user.getLogin())
+                 .username(user.getUsername())
                  .password(user.getPassword())
                  .roles("USER")
                  .build()

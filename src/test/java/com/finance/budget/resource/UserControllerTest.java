@@ -1,7 +1,8 @@
 package com.finance.budget.resource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.finance.budget.model.User;
+
+import com.finance.budget.model.Users;
 import com.finance.budget.resource.dto.UserDto;
 
 import com.finance.budget.service.implementation.UserServiceImpl;
@@ -48,11 +49,11 @@ public class UserControllerTest {
     @DisplayName("should return a user")
     @WithMockUser("spring")
     public void createUserTest() throws Exception {
-      User user= createNewUser();
+      Users user= createNewUser();
       UserDto dto= createNewUserDto();
 
       String json= new ObjectMapper().writeValueAsString(dto);
-        BDDMockito.given(userService.create(Mockito.any(User.class))).willReturn(user);
+        BDDMockito.given(userService.create(Mockito.any(Users.class))).willReturn(user);
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post(USER_API)
                 .accept(MediaType.APPLICATION_JSON)
@@ -63,32 +64,32 @@ public class UserControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("id").value("1"))
                 .andExpect(jsonPath("email").value("fakeemail@gmail.com"))
-                .andExpect(jsonPath("login").value("mauricio"))
+                .andExpect(jsonPath("username").value("mauricio"))
                 .andExpect(jsonPath("password").value("123"))
-                .andExpect(jsonPath("role").value("ADMIN"))
+
         ;
 
 
     }
 
-    private User createNewUser(){
-        return User
+    private Users createNewUser(){
+        return Users
                 .builder()
                 .id(1L)
-                .login("mauricio")
+                .username("mauricio")
                 .password("123")
                 .email("fakeemail@gmail.com")
-                .role("ADMIN")
+
                 .build();
     }
 
     private UserDto createNewUserDto(){
         return UserDto
                 .builder()
-                .login("mauricio")
+                .username("mauricio")
                 .password("123")
                 .email("fakeemail@gmail.com")
-                .role("ADMIN")
+
                 .build();
     }
 

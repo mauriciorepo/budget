@@ -2,7 +2,8 @@ package com.finance.budget.resource;
 
 import javax.validation.Valid;
 
-import com.finance.budget.model.User;
+
+import com.finance.budget.model.Users;
 import com.finance.budget.resource.dto.UserDto;
 
 import com.finance.budget.service.implementation.UserServiceImpl;
@@ -28,7 +29,7 @@ public class UserController {
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto create(@RequestBody @Valid UserDto userDto){
-        User user= modelMapper.map(userDto, User.class);
+        Users user= modelMapper.map(userDto, Users.class);
 
         user=service.create(user);
         return modelMapper.map(user,UserDto.class);

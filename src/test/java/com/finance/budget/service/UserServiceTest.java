@@ -1,7 +1,8 @@
 package com.finance.budget.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import com.finance.budget.model.User;
+
+import com.finance.budget.model.Users;
 import com.finance.budget.model.repository.UserRepository;
 
 import com.finance.budget.service.implementation.UserServiceImpl;
@@ -36,8 +37,8 @@ public class UserServiceTest {
     @Test
     @DisplayName("should return a user")
     public void createUser(){
-        User user= createNewUser();
-          Mockito.when(repository.save(Mockito.any(User.class))).thenReturn(user);
+        Users user= createNewUser();
+          Mockito.when(repository.save(Mockito.any(Users.class))).thenReturn(user);
 
         user=service.create(user);
 
@@ -47,11 +48,11 @@ public class UserServiceTest {
     }
 
 
-    private User createNewUser(){
-        return User
+    private Users createNewUser(){
+        return Users
                 .builder()
                 .id(1L)
-                .login("mauricio")
+                .username("mauricio")
                 .password("123")
                 .email("fakeemail@gmail.com")
                 .build();
