@@ -232,19 +232,37 @@ Returns json data about a single company.
 ##  Company Story (update company)
 > As **User or Admin**, i want to be able to update some company, so that i may make budget for that company.
 >
->**Scenario 1**: Invalid Company
+>**Scenario 1**: Invalid Product
 >
-> **Given** the user is on window company<br>
-> **when** fill with id company with null<br>
+> **Given** the user is on window product<br>
+> **when** fill with id product with null<br>
+> **then**  should return not found when products is null.
+>
+> **Scenario 2**: Valid updated Product
+>
+> **Given** the user or admin is on window product<br>
+> **when** fill with name <br>
+> **Or** fill with description<br>
+> **Or** fill with price<br>
+> **then** should return a updated product
+
+
+##  Product Story (delete product)
+> As **User or Admin**, i want to be able to delete some product, so that i may make sales for that product.
+>
+>**Scenario 1**: Invalid Product
+>
+> **Given** the user is on window Product<br>
+> **when** fill with id product with null<br>
 > **then**  should return not found when companies is null.
 >
-> **Scenario 2**: Valid updated Company
+> **Scenario 2**: Valid deletion Product
 >
-> **Given** the user or admin is on window company,<br>
-> **when** fill with name <br>
+> **Given** the user or admin is on window product<br>
+> **when** fill with  <br>
 > **Or** fill with email<br>
 > **Or** fill with cellphone <br>
 > **Or** fill with stateAbbrev<br>
-> **then** should return a updated company.
+> **then** should return a deleted product.
 > 
 
